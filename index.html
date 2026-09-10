@@ -4,1710 +4,1797 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glacy Fillms — Cinematic Video Editor</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#F6F9FF;
-  --surface:#EAF1FC;
-  --surface-2:#DCE9FB;
-  --ink:#0B1F3A;
-  --muted:#5A7290;
-  --accent:#2F6FED;
-  --accent-2:#7FB3FF;
-  --line:rgba(11,31,58,0.12);
-  --radius:2px;
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Inter,sans-serif;
-  background:var(--bg);
-  color:var(--ink);
-  overflow-x:hidden;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font:inherit;
-}
-
-.loader{
-  position:fixed;
-  inset:0;
-  background:var(--bg);
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:opacity .6s ease,visibility .6s ease;
-}
-
-.loader.hidden{
-  opacity:0;
-  visibility:hidden;
-}
-
-.loader-inner{
-  width:180px;
-}
-
-.loader-top{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-  font-family:"JetBrains Mono",monospace;
-  font-size:11px;
-  letter-spacing:.08em;
-}
-
-.loader-bar{
-  height:2px;
-  background:var(--line);
-  overflow:hidden;
-}
-
-.loader-progress{
-  height:100%;
-  width:0;
-  background:var(--accent);
-  animation:load 1.4s ease forwards;
-}
-
-@keyframes load{
-  to{width:100%}
-}
-
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:72px;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 5vw;
-  background:rgba(246,249,255,.82);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-}
-
-.logo{
-  font-family:"Space Grotesk",sans-serif;
-  font-weight:700;
-  font-size:18px;
-  letter-spacing:-.04em;
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.logo-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 12px rgba(47,111,237,.7);
-}
-
-nav{
-  display:flex;
-  align-items:center;
-  gap:32px;
-}
-
-nav a{
-  font-family:"JetBrains Mono",monospace;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--muted);
-  transition:color .2s ease;
-}
-
-nav a:hover{
-  color:var(--ink);
-}
-
-.nav-cta{
-  color:var(--ink)!important;
-  border:1px solid var(--ink);
-  padding:9px 14px;
-  transition:.25s ease;
-}
-
-.nav-cta:hover{
-  background:var(--ink);
-  color:white!important;
-}
-
-.hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  padding:120px 5vw 100px;
-  overflow:hidden;
-}
-
-.hero-content{
-  max-width:1000px;
-  position:relative;
-  z-index:2;
-}
-
-.eyebrow{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-family:"JetBrains Mono",monospace;
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:28px;
-}
-
-.eyebrow-line{
-  width:34px;
-  height:1px;
-  background:var(--accent);
-}
-
-.hero-title{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:clamp(55px,8.2vw,125px);
-  line-height:.88;
-  letter-spacing:-.065em;
-  max-width:1000px;
-  margin-bottom:35px;
-}
-
-.hero-title span{
-  background:linear-gradient(
-    110deg,
-    var(--ink),
-    var(--accent),
-    var(--ink)
-  );
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shimmer 6s linear infinite;
-}
-
-@keyframes shimmer{
-  to{background-position:200% center}
-}
-
-.hero-description{
-  max-width:560px;
-  font-size:17px;
-  line-height:1.7;
-  color:var(--muted);
-  margin-bottom:35px;
-}
-
-.hero-actions{
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:13px 19px;
-  border:1px solid var(--ink);
-  font-family:"JetBrains Mono",monospace;
-  font-size:11px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  transition:.25s ease;
-}
-
-.btn:hover{
-  background:var(--ink);
-  color:white;
-  transform:translateY(-2px);
-}
-
-.timecode{
-  position:absolute;
-  top:120px;
-  right:5vw;
-  font-family:"JetBrains Mono",monospace;
-  font-size:11px;
-  color:var(--muted);
-  letter-spacing:.08em;
-}
-
-.hero-glow{
-  position:absolute;
-  width:600px;
-  height:600px;
-  right:-150px;
-  bottom:-180px;
-  background:radial-gradient(
-    circle,
-    rgba(47,111,237,.18),
-    transparent 70%
-  );
-  filter:blur(20px);
-  animation:float 8s ease-in-out infinite;
-}
-
-.hero-glow-2{
-  position:absolute;
-  width:350px;
-  height:350px;
-  left:-120px;
-  top:25%;
-  background:radial-gradient(
-    circle,
-    rgba(127,179,255,.2),
-    transparent 70%
-  );
-  filter:blur(25px);
-  animation:float 10s ease-in-out infinite reverse;
-}
-
-@keyframes float{
-  0%,100%{transform:translate(0,0)}
-  50%{transform:translate(30px,-25px)}
-}
-
-section{
-  padding:130px 5vw;
-}
-
-.section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:30px;
-  margin-bottom:55px;
-}
-
-.section-title{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:clamp(40px,5vw,72px);
-  line-height:.95;
-  letter-spacing:-.06em;
-  max-width:800px;
-}
-
-.section-meta{
-  font-family:"JetBrains Mono",monospace;
-  font-size:10px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-
-
-/* SMALLER VIDEO GRID */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,560px));
-  justify-content:center;
-  gap:20px;
-}
-
-.reel-card{
-  position:relative;
-  background:var(--surface);
-  border:1px solid var(--line);
-  overflow:hidden;
-  cursor:pointer;
-  transition:transform .35s ease,box-shadow .35s ease;
-  max-width:560px;
-}
-
-.reel-card:hover{
-  transform:translateY(-7px);
-  box-shadow:0 20px 50px rgba(11,31,58,.12);
-}
-
-.thumb{
-  aspect-ratio:16/9;
-  position:relative;
-  overflow:hidden;
-  background:var(--surface-2);
-}
-
-.thumb-image{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .6s cubic-bezier(.2,.7,.2,1);
-}
-
-.reel-card:hover .thumb-image{
-  transform:scale(1.05);
-}
-
-.thumb-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(11,31,58,.55)
-  );
-}
-
-.play{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:58px;
-  height:58px;
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  backdrop-filter:blur(6px);
-  background:rgba(11,31,58,.18);
-  transition:.3s ease;
-}
-
-.play::after{
-  content:"";
-  width:0;
-  height:0;
-  border-top:7px solid transparent;
-  border-bottom:7px solid transparent;
-  border-left:10px solid white;
-  margin-left:3px;
-}
-
-.reel-card:hover .play{
-  background:var(--accent);
-  border-color:var(--accent);
-  transform:translate(-50%,-50%) scale(1.08);
-}
-
-.thumb-label{
-  position:absolute;
-  top:16px;
-  left:16px;
-  padding:6px 8px;
-  font-family:"JetBrains Mono",monospace;
-  font-size:9px;
-  letter-spacing:.08em;
-  background:rgba(246,249,255,.9);
-  color:var(--ink);
-}
-
-.thumb-watch{
-  position:absolute;
-  right:16px;
-  bottom:16px;
-  font-family:"JetBrains Mono",monospace;
-  font-size:9px;
-  color:white;
-  letter-spacing:.1em;
-}
-
-.card-info{
-  padding:22px 22px 25px;
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.card-title{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:24px;
-  font-weight:600;
-  letter-spacing:-.035em;
-  margin-bottom:7px;
-}
-
-.card-description{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
-}
-
-.card-number{
-  font-family:"JetBrains Mono",monospace;
-  font-size:10px;
-  color:var(--muted);
-}
-
-.video-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(5,15,30,.92);
-  z-index:1000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-}
-
-.video-modal.active{
-  display:flex;
-}
-
-.modal-content{
-  width:min(1100px,95vw);
-  position:relative;
-}
-
-.modal-video{
-  width:100%;
-  aspect-ratio:16/9;
-  border:0;
-  display:block;
-}
-
-.modal-close{
-  position:absolute;
-  right:0;
-  top:-48px;
-  color:white;
-  background:none;
-  border:0;
-  font-size:28px;
-  cursor:pointer;
-}
-
-.process-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  border-top:1px solid var(--line);
-}
-
-.process-item{
-  padding:30px 25px 30px 0;
-  border-right:1px solid var(--line);
-  margin-right:25px;
-}
-
-.process-item:last-child{
-  border-right:0;
-}
-
-.process-number{
-  font-family:"JetBrains Mono",monospace;
-  font-size:10px;
-  color:var(--accent);
-  margin-bottom:45px;
-}
-
-.process-title{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:22px;
-  margin-bottom:13px;
-  letter-spacing:-.03em;
-}
-
-.process-text{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.65;
-}
-
-.about{
-  background:var(--surface);
-}
-
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:start;
-}
-
-.about-text{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:clamp(28px,3vw,44px);
-  line-height:1.1;
-  letter-spacing:-.04em;
-}
-
-.about-text span{
-  color:var(--accent);
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
-}
-
-.stat{
-  background:var(--surface);
-  padding:25px;
-  min-height:145px;
-}
-
-.stat-number{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:42px;
-  letter-spacing:-.05em;
-  margin-bottom:10px;
-}
-
-.stat-label{
-  font-family:"JetBrains Mono",monospace;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--muted);
-}
-
-.book{
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.book .section-title{
-  margin:0 auto 25px;
-}
-
-.book-text{
-  color:var(--muted);
-  max-width:520px;
-  margin:0 auto 30px;
-  line-height:1.7;
-  font-size:14px;
-}
-
-.book-btn{
-  display:inline-flex;
-}
-
-footer{
-  padding:35px 5vw 80px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:var(--muted);
-  font-family:"JetBrains Mono",monospace;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-.timeline{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:38px;
-  background:rgba(246,249,255,.94);
-  backdrop-filter:blur(12px);
-  border-top:1px solid var(--line);
-  z-index:90;
-  display:flex;
-  align-items:center;
-  padding:0 5vw;
-  font-family:"JetBrains Mono",monospace;
-  font-size:9px;
-  color:var(--muted);
-}
-
-.timeline-progress{
-  position:absolute;
-  top:-1px;
-  left:0;
-  width:0;
-  height:1px;
-  background:var(--accent);
-}
-
-.timeline-inner{
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.timeline-chapters{
-  display:flex;
-  gap:25px;
-}
-
-.timeline-chapter{
-  transition:color .2s ease;
-}
-
-.timeline-chapter.active{
-  color:var(--accent);
-}
-
-@media(max-width:800px){
+  :root{
+    --bg:#F6F9FF;
+    --surface:#EAF1FC;
+    --surface-2:#DCE9FB;
+    --ink:#0B1F3A;
+    --muted:#5A7290;
+    --accent:#2F6FED;
+    --accent-2:#7FB3FF;
+    --line: rgba(11,31,58,0.12);
+    --radius: 2px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:56px;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.02em;
+  }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  a{
+    color:inherit;
+    text-decoration:none;
+  }
+
+  ::selection{
+    background:var(--accent);
+    color:#fff;
+  }
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{
+      opacity:0;
+      transform:translateY(16px);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.in{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  /* ---------- LOADER ---------- */
+
+  .loader{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    background:var(--ink);
+    color:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .8s cubic-bezier(.76,0,.24,1), opacity .6s ease .1s;
+  }
+
+  .loader.hide{
+    transform:translateY(-100%);
+    opacity:0;
+    pointer-events:none;
+  }
+
+  .loader-inner{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    letter-spacing:0.14em;
+  }
+
+  .loader .rec-dot{
+    background:var(--accent);
+  }
+
+  /* ---------- HERO WORD STAGGER ---------- */
+
+  @media (prefers-reduced-motion: no-preference){
+    .hero-title .word{
+      display:inline-block;
+      opacity:0;
+      transform:translateY(28px);
+      animation:wordIn .7s cubic-bezier(.16,1,.3,1) forwards;
+      animation-delay:calc(var(--i) * 0.055s + 0.5s);
+    }
+
+    @keyframes wordIn{
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-title .word{
+      opacity:1;
+      transform:none;
+    }
+  }
+
+  /* ---------- HEADER ---------- */
 
   header{
-    padding:0 20px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(246,249,255,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
   }
 
-  nav{
-    gap:14px;
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 0;
   }
 
-  nav a:not(.nav-cta){
-    display:none;
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Grotesk';
+    font-weight:700;
+    font-size:18px;
   }
 
-  section{
-    padding:90px 20px;
+  .rec-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent);
   }
+
+  @media (prefers-reduced-motion: no-preference){
+    .rec-dot{
+      animation:pulse 2s ease-in-out infinite;
+    }
+  }
+
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.25;}
+  }
+
+  nav ul{
+    display:flex;
+    gap:32px;
+    list-style:none;
+  }
+
+  nav ul li a{
+    font-size:14px;
+    color:var(--muted);
+    transition:color .2s;
+  }
+
+  nav ul li a:not(.btn){
+    position:relative;
+    padding-bottom:2px;
+  }
+
+  nav ul li a:not(.btn)::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:1px;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:right;
+    transition:transform .3s cubic-bezier(.16,1,.3,1);
+  }
+
+  nav ul li a:not(.btn):hover::after{
+    transform:scaleX(1);
+    transform-origin:left;
+  }
+
+  nav ul li a:hover{
+    color:var(--ink);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    color:var(--bg);
+    padding:11px 20px;
+    border-radius:var(--radius);
+    font-size:14px;
+    font-weight:500;
+    border:1px solid var(--ink);
+    cursor:pointer;
+    transition:background .25s, color .25s, transform .25s ease, box-shadow .25s ease;
+  }
+
+  .btn:hover{
+    background:transparent;
+    color:var(--ink);
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(47,111,237,0.22);
+  }
+
+  .btn:active{
+    transform:translateY(0);
+  }
+
+  .btn-outline{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--line);
+  }
+
+  .btn-outline:hover{
+    border-color:var(--ink);
+  }
+
+  /* ---------- HERO ---------- */
 
   .hero{
-    padding:110px 20px 80px;
+    position:relative;
+    padding:120px 0 100px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+
+  .parallax{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  .glow-blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .glow-blob.b1{
+    width:420px;
+    height:420px;
+    top:-160px;
+    right:-100px;
+    background:radial-gradient(circle, rgba(47,111,237,0.35), transparent 70%);
+  }
+
+  .glow-blob.b2{
+    width:340px;
+    height:340px;
+    bottom:-140px;
+    left:-80px;
+    background:radial-gradient(circle, rgba(127,179,255,0.3), transparent 70%);
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .glow-blob.b1{
+      animation:driftA 14s ease-in-out infinite;
+    }
+
+    .glow-blob.b2{
+      animation:driftB 16s ease-in-out infinite;
+    }
+  }
+
+  @keyframes driftA{
+    0%,100%{
+      transform:translate(0,0) scale(1);
+    }
+
+    50%{
+      transform:translate(-30px,30px) scale(1.1);
+    }
+  }
+
+  @keyframes driftB{
+    0%,100%{
+      transform:translate(0,0) scale(1);
+    }
+
+    50%{
+      transform:translate(24px,-24px) scale(1.08);
+    }
+  }
+
+  .hero .wrap{
+    position:relative;
+    z-index:1;
+  }
+
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1 em{
+      animation:shimmer 4s linear infinite;
+    }
+  }
+
+  @keyframes shimmer{
+    0%{background-position:0% center;}
+    100%{background-position:200% center;}
+  }
+
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:48px;
+    font-size:13px;
+    color:var(--muted);
   }
 
   .timecode{
-    right:20px;
-    top:100px;
+    font-size:13px;
+    letter-spacing:0.02em;
   }
 
-  .hero-title{
-    font-size:18vw;
+  .hero h1{
+    font-size:clamp(40px, 7vw, 84px);
+    line-height:0.98;
+    max-width:900px;
   }
+
+  .hero-sub{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-top:40px;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+
+  .hero-desc{
+    max-width:420px;
+    color:var(--muted);
+    font-size:16px;
+  }
+
+  .play-reel{
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 22px 14px 14px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--surface);
+    transition:border-color .2s, transform .2s, box-shadow .3s;
+  }
+
+  .play-reel:hover{
+    border-color:var(--accent);
+    transform:translateX(2px);
+    box-shadow:0 8px 22px rgba(47,111,237,0.18);
+  }
+
+  .play-icon{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .play-icon{
+      animation:iconPulse 2.4s ease-in-out infinite;
+    }
+  }
+
+  @keyframes iconPulse{
+    0%,100%{
+      box-shadow:0 0 0 0 rgba(47,111,237,0.35);
+    }
+
+    50%{
+      box-shadow:0 0 0 8px rgba(47,111,237,0);
+    }
+  }
+
+  .play-icon svg{
+    width:12px;
+    height:12px;
+    margin-left:2px;
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+
+  .section{
+    padding:96px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--muted);
+    margin-bottom:20px;
+    text-transform:uppercase;
+  }
+
+  .eyebrow .tc{
+    color:var(--accent);
+  }
+
+  .section h2{
+    font-size:clamp(28px,4vw,42px);
+    max-width:640px;
+    margin-bottom:48px;
+  }
+
+  /* ---------- WORK GRID ---------- */
 
   .grid{
-    grid-template-columns:1fr;
-    justify-items:center;
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 430px));
+    justify-content:center;
+    gap:20px;
+  }
+
+  @media (max-width:720px){
+    .grid{
+      grid-template-columns:1fr;
+    }
   }
 
   .reel-card{
-    width:100%;
-    max-width:560px;
+    position:relative;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--surface);
+    transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease;
   }
 
-  .process-grid{
-    grid-template-columns:1fr 1fr;
+  .reel-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 16px 34px rgba(11,31,58,0.12);
+  }
+
+  .reel-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-160%;
+    width:55%;
+    height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,0.22), transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    z-index:3;
+    pointer-events:none;
+  }
+
+  .reel-card:hover::before{
+    left:160%;
+  }
+
+  .thumb{
+    aspect-ratio:16/9;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    transition:transform .5s cubic-bezier(.16,1,.3,1);
+  }
+
+  .reel-card:hover .thumb{
+    transform:scale(1.045);
+  }
+
+  .thumb::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%);
+  }
+
+  .thumb .duration{
+    position:absolute;
+    bottom:10px;
+    right:12px;
+    z-index:2;
+    font-size:12px;
+    background:rgba(0,0,0,0.55);
+    padding:3px 7px;
+    border-radius:2px;
+  }
+
+  .thumb .play-mini{
+    z-index:2;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .2s, background .2s;
+  }
+
+  .reel-card:hover .play-mini{
+    transform:scale(1.08);
+    background:rgba(255,255,255,0.15);
+    animation:ringPulse 1.3s ease-out infinite;
+  }
+
+  .play-mini svg{
+    width:14px;
+    height:14px;
+    margin-left:2px;
+  }
+
+  @keyframes ringPulse{
+    0%{
+      box-shadow:0 0 0 0 rgba(255,255,255,0.45);
+    }
+
+    100%{
+      box-shadow:0 0 0 16px rgba(255,255,255,0);
+    }
+  }
+
+  .thumb.g1{
+    background-image:
+      linear-gradient(135deg, rgba(18,35,63,.15), rgba(8,18,38,.25)),
+      url("https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg");
+  }
+
+  .thumb.g2{
+    background-image:
+      linear-gradient(135deg, rgba(27,58,102,.15), rgba(8,18,38,.25)),
+      url("https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg");
+  }
+
+  .thumb.g3{
+    background-image:
+      linear-gradient(135deg, rgba(15,46,78,.15), rgba(8,18,38,.25)),
+      url("https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg");
+  }
+
+  .thumb.g4{
+    background-image:
+      linear-gradient(135deg, rgba(25,52,88,.15), rgba(8,18,38,.25)),
+      url("https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg");
+  }
+
+  .reel-info{
+    padding:16px 18px;
+  }
+
+  .reel-info .title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+  }
+
+  .reel-info h3{
+    font-size:16px;
+  }
+
+  .reel-info .cat{
+    font-size:11px;
+    color:var(--muted);
+  }
+
+  .reel-info p{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:5px;
+  }
+
+  /* ---------- VIDEO MODAL ---------- */
+
+  .video-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(11,31,58,0.82);
+    backdrop-filter:blur(8px);
+    z-index:300;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .video-modal.active{
+    display:flex;
+  }
+
+  .modal-content{
+    width:min(900px, 100%);
+    position:relative;
+    background:#000;
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+  }
+
+  .modal-video{
+    width:100%;
+    aspect-ratio:16/9;
+    display:block;
+    border:none;
+  }
+
+  .modal-close{
+    position:absolute;
+    top:-46px;
+    right:0;
+    width:36px;
+    height:36px;
+    border:1px solid rgba(255,255,255,.4);
+    background:rgba(0,0,0,.25);
+    color:#fff;
+    cursor:pointer;
+    font-size:22px;
+    line-height:1;
+  }
+
+  /* ---------- PROCESS ---------- */
+
+  .process-list{
+    display:flex;
+    flex-direction:column;
   }
 
   .process-item{
-    border-right:0;
-    margin-right:0;
-    padding-right:15px;
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:24px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
   }
+
+  .process-item:last-child{
+    border-bottom:1px solid var(--line);
+  }
+
+  .process-item .num{
+    font-size:13px;
+    color:var(--accent);
+    padding-top:4px;
+  }
+
+  .process-item h3{
+    font-size:19px;
+    margin-bottom:6px;
+  }
+
+  .process-item p{
+    color:var(--muted);
+    font-size:15px;
+    max-width:520px;
+  }
+
+  /* ---------- ABOUT ---------- */
 
   .about-grid{
-    grid-template-columns:1fr;
-    gap:45px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:start;
   }
 
-  .timeline-chapters{
-    display:none;
+  @media (max-width:800px){
+    .about-grid{
+      grid-template-columns:1fr;
+    }
   }
 
-  .timeline-inner{
-    justify-content:flex-end;
-  }
-}
-
-@media(max-width:500px){
-
-  .process-grid{
-    grid-template-columns:1fr;
+  .about-grid p{
+    color:var(--muted);
+    font-size:16px;
+    margin-bottom:18px;
+    max-width:520px;
   }
 
-  .stats{
-    grid-template-columns:1fr;
+  .stat-block{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
   }
 
-  .hero-actions{
+  .stat{
+    border:1px solid var(--line);
+    padding:20px;
+    border-radius:var(--radius);
+    background:var(--surface);
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+
+  .stat:hover{
+    transform:translateY(-4px);
+    border-color:var(--accent);
+    box-shadow:0 12px 26px rgba(47,111,237,0.18);
+  }
+
+  .stat .num{
+    font-family:'Space Grotesk';
+    font-size:30px;
+    font-weight:600;
+  }
+
+  .stat .label{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:4px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- BOOK / CONTACT ---------- */
+
+  .book-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:60px;
+  }
+
+  @media (max-width:800px){
+    .book-grid{
+      grid-template-columns:1fr;
+    }
+  }
+
+  .book-info p{
+    color:var(--muted);
+    font-size:15px;
+    margin-bottom:24px;
+    max-width:400px;
+  }
+
+  .contact-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    margin-bottom:12px;
+  }
+
+  .contact-line .k{
+    color:var(--muted);
+    width:80px;
+    flex-shrink:0;
+  }
+
+  form{
+    display:flex;
     flex-direction:column;
-    align-items:flex-start;
+    gap:16px;
   }
+
+  .field-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+
+  @media (max-width:560px){
+    .field-row{
+      grid-template-columns:1fr;
+    }
+  }
+
+  label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--muted);
+    display:block;
+    margin-bottom:6px;
+  }
+
+  input, select, textarea{
+    width:100%;
+    padding:12px 14px;
+    font-family:'Inter';
+    font-size:14px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .2s, background .2s;
+  }
+
+  input:focus, select:focus, textarea:focus{
+    border-color:var(--ink);
+    background:#fff;
+  }
+
+  textarea{
+    resize:vertical;
+    min-height:110px;
+  }
+
+  .form-note{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:4px;
+  }
+
+  button[type="submit"]{
+    align-self:flex-start;
+    border:none;
+  }
+
+  /* ---------- FOOTER ---------- */
 
   footer{
-    flex-direction:column;
+    padding:48px 0;
   }
-}
+
+  .footer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+
+  footer .mono{
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  /* ---------- TIMELINE ---------- */
+
+  .timeline-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:56px;
+    background:rgba(246,249,255,0.88);
+    backdrop-filter:blur(8px);
+    border-top:1px solid var(--line);
+    z-index:60;
+    display:flex;
+    align-items:center;
+    padding:0 24px;
+    gap:16px;
+  }
+
+  .tl-track{
+    position:relative;
+    flex:1;
+    height:2px;
+    background:var(--line);
+    border-radius:2px;
+  }
+
+  .tl-fill{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    background:var(--accent);
+    width:0%;
+    border-radius:2px;
+    transition:width .1s linear;
+    box-shadow:0 0 10px rgba(47,111,237,0.6);
+    overflow:hidden;
+  }
+
+  .tl-fill::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.75), transparent);
+    width:40%;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .tl-fill::after{
+      animation:tlShimmer 2.2s ease-in-out infinite;
+    }
+  }
+
+  @keyframes tlShimmer{
+    0%{transform:translateX(-120%);}
+    100%{transform:translateX(340%);}
+  }
+
+  .tl-marks{
+    position:absolute;
+    inset:0;
+  }
+
+  .tl-mark{
+    position:absolute;
+    top:-4px;
+    width:1px;
+    height:10px;
+    background:var(--line);
+    transition:background .25s ease, transform .25s ease;
+  }
+
+  .tl-mark.active{
+    background:var(--accent);
+    transform:scaleY(1.3);
+  }
+
+  .tl-chapter{
+    font-size:12px;
+    font-family:'JetBrains Mono';
+    color:var(--muted);
+    min-width:70px;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+
+  .tl-chapter.flash{
+    opacity:0;
+    transform:translateY(-4px);
+  }
+
+  .tl-time{
+    font-size:12px;
+    font-family:'JetBrains Mono';
+    color:var(--muted);
+    min-width:64px;
+    text-align:right;
+  }
+
+  @media (max-width:640px){
+    .tl-chapter{
+      display:none;
+    }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="loader">
+<div class="loader" id="loader">
   <div class="loader-inner">
-    <div class="loader-top">
-      <span>GLACY FILMS</span>
-      <span>2026</span>
-    </div>
-
-    <div class="loader-bar">
-      <div class="loader-progress"></div>
-    </div>
+    <span class="rec-dot"></span>
+    <span class="mono">GLACY FILLMS</span>
   </div>
 </div>
 
-
 <header>
+  <div class="wrap nav">
+    <div class="logo">
+      <span class="rec-dot"></span>
+      GLACY FILLMS
+    </div>
 
-  <a href="#" class="logo">
-    <span class="logo-dot"></span>
-    GLACY FILLMS
-  </a>
-
-  <nav>
-    <a href="#work">Work</a>
-    <a href="#process">Process</a>
-    <a href="#about">About</a>
-    <a href="#book" class="nav-cta">Book a call</a>
-  </nav>
-
+    <nav>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#book" class="btn" style="padding:8px 16px;">Book a call</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-
-<main>
-
 <section class="hero">
-
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-
-  <div class="timecode">
-    <span id="timecode">00:00:00:00</span>
+  <div class="parallax p1">
+    <div class="glow-blob b1"></div>
   </div>
 
-  <div class="hero-content">
+  <div class="parallax p2">
+    <div class="glow-blob b2"></div>
+  </div>
 
-    <div class="eyebrow">
-      <span class="eyebrow-line"></span>
-      REEL / 2026
+  <div class="wrap">
+    <div class="hero-top mono">
+      <span>REEL / 2026</span>
+      <span class="timecode" id="clock">00:00:00:00</span>
     </div>
 
     <h1 class="hero-title">
-      Cinematic edits,<br>
-      <span>built frame by frame.</span>
+      <span class="word" style="--i:0">Cinematic</span>
+      <span class="word" style="--i:1">edits,</span><br>
+      <span class="word" style="--i:2">built</span>
+      <em>
+        <span class="word" style="--i:3">frame</span>
+        <span class="word" style="--i:4">by</span>
+        <span class="word" style="--i:5">frame.</span>
+      </em>
     </h1>
 
-    <p class="hero-description">
-      I'm Glacy — a video editor focused on cinematic storytelling,
-      smooth flow, sound design and visual effects.
-      Every frame has a purpose.
-    </p>
+    <div class="hero-sub">
+      <p class="hero-desc reveal">
+        Video editor crafting cinematic vlogs, fan-edit action sequences with full original sound design, and fast-paced short-form cuts with captions and SFX.
+      </p>
 
-    <div class="hero-actions">
-
-      <a href="#work" class="btn">
-        Watch my work
-        <span>↓</span>
+      <a href="#work" class="play-reel reveal">
+        <span class="play-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </span>
+        <span>Watch showreel — 01:42</span>
       </a>
-
     </div>
-
   </div>
-
 </section>
 
+<section class="section" id="work">
+  <div class="wrap">
 
-<section id="work">
+    <div class="eyebrow">
+      <span class="tc mono">01</span>
+      <span>Selected work</span>
+    </div>
 
-  <div class="section-head">
+    <h2 class="reveal">
+      A handful of recent projects.
+    </h2>
+
+    <div class="grid">
+
+      <!-- VIDEO 1 -->
+      <div class="reel-card reveal" onclick="openVideo('YCfv4CIvmhg')">
+        <div class="thumb g1">
+          <span class="play-mini">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="reel-info">
+          <div class="title-row">
+            <h3>Latest Work</h3>
+            <span class="cat mono">EDIT</span>
+          </div>
+          <p>Latest edit by Glacy.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO 2 -->
+      <div class="reel-card reveal" onclick="openVideo('eZLlwzoG1-I')">
+        <div class="thumb g2">
+          <span class="play-mini">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="reel-info">
+          <div class="title-row">
+            <h3>No Way Home</h3>
+            <span class="cat mono">FAN EDIT</span>
+          </div>
+          <p>Cinematic Spider-Man fan edit.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO 3 -->
+      <div class="reel-card reveal" onclick="openVideo('rQuOHkXVegY')">
+        <div class="thumb g3">
+          <span class="play-mini">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="reel-info">
+          <div class="title-row">
+            <h3>Football Edit</h3>
+            <span class="cat mono">FOOTBALL</span>
+          </div>
+          <p>Fast-paced football edit.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO 4 -->
+      <div class="reel-card reveal" onclick="openVideo('DE1S7t1AQmQ')">
+        <div class="thumb g4">
+          <span class="play-mini">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="reel-info">
+          <div class="title-row">
+            <h3>Flow & SFX</h3>
+            <span class="cat mono">EDITING</span>
+          </div>
+          <p>Smooth flow with custom SFX.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="wrap">
+
+    <div class="eyebrow">
+      <span class="tc mono">02</span>
+      <span>How a project runs</span>
+    </div>
+
+    <h2 class="reveal">
+      From footage dump to final export.
+    </h2>
+
+    <div class="process-list">
+
+      <div class="process-item reveal">
+        <div class="num mono">01</div>
+        <div>
+          <h3>Ingest & organize</h3>
+          <p>
+            Footage is logged, synced, and bin-organized so nothing gets lost before the first cut.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-item reveal">
+        <div class="num mono">02</div>
+        <div>
+          <h3>Assembly cut</h3>
+          <p>
+            A rough structure goes to you fast, so we can agree on story and pace before polish begins.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-item reveal">
+        <div class="num mono">03</div>
+        <div>
+          <h3>Fine cut & sound design</h3>
+          <p>
+            Pacing, transitions, and — on action/fan edits — full custom sound design: foley, impacts, and score sync.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-item reveal">
+        <div class="num mono">04</div>
+        <div>
+          <h3>Color, captions & delivery</h3>
+          <p>
+            Grade, caption styling, and export in whatever format you need — vertical for Reels, horizontal for YouTube.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about-grid">
+
+    <div>
+      <div class="eyebrow">
+        <span class="tc mono">03</span>
+        <span>About</span>
+      </div>
+
+      <h2 class="reveal">
+        Hi, I'm Glacy — I edit like every frame has a job to do.
+      </h2>
+
+      <p class="reveal">
+        I'm a cinematic video editor, known as <strong>glacy.fillms</strong> on Instagram, based in Slovakia. My work spans cinematic vlogs, superhero fan edits, and fast, caption-heavy short-form content.
+      </p>
+
+      <p class="reveal">
+        On action/fan edits I build the sound design myself — foley, impacts, and score layering — so every hit lands and every transition feels intentional, not just fast.
+      </p>
+    </div>
+
+    <div class="stat-block">
+
+      <div class="stat reveal">
+        <div class="num" data-count="30" data-suffix="+">0+</div>
+        <div class="label">Edits delivered</div>
+      </div>
+
+      <div class="stat reveal">
+        <div class="num">6 mo</div>
+        <div class="label">Editing experience</div>
+      </div>
+
+      <div class="stat reveal">
+        <div class="num">SK</div>
+        <div class="label">Based in Slovakia</div>
+      </div>
+
+      <div class="stat reveal">
+        <div class="num" data-count="100" data-suffix="%">0%</div>
+        <div class="label">Original sound design on action edits</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="book" style="border-bottom:none;">
+  <div class="wrap book-grid">
+
+    <div class="book-info">
+
+      <div class="eyebrow">
+        <span class="tc mono">04</span>
+        <span>Book a call</span>
+      </div>
+
+      <h2 class="reveal" style="margin-bottom:24px;">
+        Tell me about the project.
+      </h2>
+
+      <p>
+        Fill this in and it lands straight in my inbox — I reply within one business day with times to talk.
+      </p>
+
+      <div class="contact-line">
+        <span class="k mono">EMAIL</span>
+        <a href="mailto:mrnutfn@gmail.com">mrnutfn@gmail.com</a>
+      </div>
+
+      <div class="contact-line">
+        <span class="k mono">IG</span>
+        <a href="https://www.instagram.com/glacy.fillms/" target="_blank">@glacy.fillms</a>
+      </div>
+
+      <div class="contact-line">
+        <span class="k mono">STATUS</span>
+        <span>Booking September 2026</span>
+      </div>
+
+    </div>
 
     <div>
 
-      <div class="eyebrow">
-        <span class="eyebrow-line"></span>
-        01 Selected work
-      </div>
+      <form action="https://formsubmit.co/mrnutfn@gmail.com" method="POST">
 
-      <h2 class="section-title">
-        A handful of recent projects.
-      </h2>
+        <input type="hidden" name="_subject" value="New project inquiry from your portfolio site">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
 
-    </div>
+        <div class="field-row">
 
-    <div class="section-meta">
-      04 / Projects
-    </div>
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="Name" required>
+          </div>
 
-  </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" required>
+          </div>
 
-
-  <div class="grid">
-
-
-    <!-- VIDEO 01 -->
-
-    <article
-      class="reel-card"
-      onclick="openVideo('YCfv4CIvmhg')"
-    >
-
-      <div class="thumb">
-
-        <img
-          class="thumb-image"
-          src="https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg"
-          alt="Latest Work"
-        >
-
-        <div class="thumb-overlay"></div>
-
-        <div class="thumb-label">
-          EDIT
         </div>
 
-        <div class="play"></div>
+        <div class="field-row">
 
-        <div class="thumb-watch">
-          WATCH
+          <div>
+            <label for="type">Project type</label>
+
+            <select id="type" name="Project type">
+              <option>Cinematic vlog</option>
+              <option>Fan edit (action / sound design)</option>
+              <option>Short-form / Reels</option>
+              <option>Other</option>
+            </select>
+
+          </div>
+
+          <div>
+            <label for="budget">Budget range</label>
+
+            <select id="budget" name="Budget">
+              <option>Under $1,000</option>
+              <option>$1,000 – $5,000</option>
+              <option>$5,000 – $15,000</option>
+              <option>$15,000+</option>
+            </select>
+
+          </div>
+
         </div>
-
-      </div>
-
-
-      <div class="card-info">
 
         <div>
-
-          <div class="card-title">
-            Latest Work
-          </div>
-
-          <div class="card-description">
-            Latest edit by Glacy.
-          </div>
-
+          <label for="date">Preferred call date</label>
+          <input type="date" id="date" name="Preferred date">
         </div>
-
-        <div class="card-number">
-          01
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <!-- VIDEO 02 -->
-
-    <article
-      class="reel-card"
-      onclick="openVideo('eZLlwzoG1-I')"
-    >
-
-      <div class="thumb">
-
-        <img
-          class="thumb-image"
-          src="https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg"
-          alt="No Way Home"
-        >
-
-        <div class="thumb-overlay"></div>
-
-        <div class="thumb-label">
-          FAN EDIT
-        </div>
-
-        <div class="play"></div>
-
-        <div class="thumb-watch">
-          WATCH
-        </div>
-
-      </div>
-
-
-      <div class="card-info">
 
         <div>
+          <label for="message">Project details</label>
 
-          <div class="card-title">
-            No Way Home
-          </div>
-
-          <div class="card-description">
-            Cinematic Spider-Man fan edit.
-          </div>
-
-        </div>
-
-        <div class="card-number">
-          02
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <!-- VIDEO 03 -->
-
-    <article
-      class="reel-card"
-      onclick="openVideo('rQuOHkXVegY')"
-    >
-
-      <div class="thumb">
-
-        <img
-          class="thumb-image"
-          src="https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg"
-          alt="Football Edit"
-        >
-
-        <div class="thumb-overlay"></div>
-
-        <div class="thumb-label">
-          FOOTBALL
-        </div>
-
-        <div class="play"></div>
-
-        <div class="thumb-watch">
-          WATCH
-        </div>
-
-      </div>
-
-
-      <div class="card-info">
-
-        <div>
-
-          <div class="card-title">
-            Football Edit
-          </div>
-
-          <div class="card-description">
-            Fast-paced football edit.
-          </div>
+          <textarea
+            id="message"
+            name="Message"
+            placeholder="Timeline, footage length, references, anything useful."
+            required
+          ></textarea>
 
         </div>
 
-        <div class="card-number">
-          03
-        </div>
+        <button type="submit" class="btn">
+          Send inquiry
+        </button>
 
-      </div>
+        <p class="form-note">
+          Submitting sends an email straight to my inbox — no account or calendar needed on your end.
+        </p>
 
-    </article>
+      </form>
 
-
-    <!-- VIDEO 04 -->
-
-    <article
-      class="reel-card"
-      onclick="openVideo('DE1S7t1AQmQ')"
-    >
-
-      <div class="thumb">
-
-        <img
-          class="thumb-image"
-          src="https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg"
-          alt="Flow and SFX"
-        >
-
-        <div class="thumb-overlay"></div>
-
-        <div class="thumb-label">
-          EDITING
-        </div>
-
-        <div class="play"></div>
-
-        <div class="thumb-watch">
-          WATCH
-        </div>
-
-      </div>
-
-
-      <div class="card-info">
-
-        <div>
-
-          <div class="card-title">
-            Flow &amp; SFX
-          </div>
-
-          <div class="card-description">
-            Smooth flow with custom SFX.
-          </div>
-
-        </div>
-
-        <div class="card-number">
-          04
-        </div>
-
-      </div>
-
-    </article>
-
+    </div>
   </div>
-
 </section>
-
-
-<section id="process">
-
-  <div class="section-head">
-
-    <div>
-
-      <div class="eyebrow">
-        <span class="eyebrow-line"></span>
-        02 Process
-      </div>
-
-      <h2 class="section-title">
-        From raw footage<br>
-        to final frame.
-      </h2>
-
-    </div>
-
-  </div>
-
-
-  <div class="process-grid">
-
-    <div class="process-item">
-
-      <div class="process-number">
-        01
-      </div>
-
-      <h3 class="process-title">
-        Ingest &amp; organize
-      </h3>
-
-      <p class="process-text">
-        Everything starts with clean organization,
-        selecting the strongest shots and understanding
-        the story behind the footage.
-      </p>
-
-    </div>
-
-
-    <div class="process-item">
-
-      <div class="process-number">
-        02
-      </div>
-
-      <h3 class="process-title">
-        Assembly cut
-      </h3>
-
-      <p class="process-text">
-        Building the structure, rhythm and first version
-        of the edit before refining every moment.
-      </p>
-
-    </div>
-
-
-    <div class="process-item">
-
-      <div class="process-number">
-        03
-      </div>
-
-      <h3 class="process-title">
-        Fine cut &amp; sound design
-      </h3>
-
-      <p class="process-text">
-        Tight timing, transitions, effects and sound
-        design come together to create the flow.
-      </p>
-
-    </div>
-
-
-    <div class="process-item">
-
-      <div class="process-number">
-        04
-      </div>
-
-      <h3 class="process-title">
-        Color, captions &amp; delivery
-      </h3>
-
-      <p class="process-text">
-        Final color, captions, motion graphics and
-        export settings ready for the platform.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="about" class="about">
-
-  <div class="section-head">
-
-    <div>
-
-      <div class="eyebrow">
-        <span class="eyebrow-line"></span>
-        03 About
-      </div>
-
-      <h2 class="section-title">
-        The person behind<br>
-        the timeline.
-      </h2>
-
-    </div>
-
-  </div>
-
-
-  <div class="about-grid">
-
-    <div class="about-text">
-
-      I'm <span>Glacy</span>, a young video editor
-      from Slovakia focused on cinematic edits,
-      visual effects and storytelling.
-
-    </div>
-
-
-    <div class="stats">
-
-      <div class="stat">
-
-        <div class="stat-number">
-          30+
-        </div>
-
-        <div class="stat-label">
-          Edits delivered
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-number">
-          6 mo
-        </div>
-
-        <div class="stat-label">
-          Editing experience
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-number">
-          SK
-        </div>
-
-        <div class="stat-label">
-          Based in Slovakia
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-number">
-          100%
-        </div>
-
-        <div class="stat-label">
-          Original sound design on action edits
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="book" class="book">
-
-  <div
-    class="eyebrow"
-    style="justify-content:center;"
-  >
-
-    <span class="eyebrow-line"></span>
-
-    04 Let's work
-
-    <span class="eyebrow-line"></span>
-
-  </div>
-
-
-  <h2 class="section-title">
-
-    Have a project<br>
-    in mind?
-
-  </h2>
-
-
-  <p class="book-text">
-
-    Tell me what you're working on and what you want
-    the final video to feel like. Let's create something
-    cinematic.
-
-  </p>
-
-
-  <a
-    href="mailto:mrnutfn@gmail.com"
-    class="btn book-btn"
-  >
-
-    Get in touch
-    <span>↗</span>
-
-  </a>
-
-</section>
-
-</main>
-
 
 <footer>
-
-  <div>
-    © 2026 Glacy Fillms
+  <div class="wrap footer-row">
+    <span class="mono">© 2026 GLACY FILLMS — VIDEO EDITOR</span>
+    <span class="mono">EDIT.MOV — 00:00:00:00 / END</span>
   </div>
-
-  <div>
-    Premiere Pro / After Effects / Slovakia
-  </div>
-
 </footer>
-
-
-<div class="timeline">
-
-  <div
-    class="timeline-progress"
-    id="timelineProgress"
-  ></div>
-
-
-  <div class="timeline-inner">
-
-    <div class="timeline-chapters">
-
-      <span class="timeline-chapter active">
-        01 WORK
-      </span>
-
-      <span class="timeline-chapter">
-        02 PROCESS
-      </span>
-
-      <span class="timeline-chapter">
-        03 ABOUT
-      </span>
-
-      <span class="timeline-chapter">
-        04 BOOK
-      </span>
-
-    </div>
-
-
-    <span id="scrollPercent">
-      00%
-    </span>
-
-  </div>
-
-</div>
-
 
 <!-- VIDEO MODAL -->
 
-<div
-  class="video-modal"
-  id="videoModal"
-  onclick="closeVideo(event)"
->
-
+<div class="video-modal" id="videoModal" onclick="closeVideo(event)">
   <div class="modal-content">
 
-    <button
-      class="modal-close"
-      onclick="closeVideo(event)"
-    >
+    <button class="modal-close" onclick="closeVideo(event)">
       ×
     </button>
-
 
     <iframe
       id="modalVideo"
       class="modal-video"
       src=""
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen>
+    </iframe>
 
   </div>
+</div>
+
+<div class="timeline-bar">
+
+  <span class="tl-chapter mono" id="tl-label">
+    INTRO
+  </span>
+
+  <div class="tl-track">
+    <div class="tl-fill" id="tl-fill"></div>
+    <div class="tl-marks" id="tl-marks"></div>
+  </div>
+
+  <span class="tl-time mono" id="tl-time">
+    00%
+  </span>
 
 </div>
 
-
 <script>
 
-/* LOADER */
+  const reduceMotion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-window.addEventListener("load", () => {
+  /* ---------- LOADER ---------- */
 
-  setTimeout(() => {
+  const loader = document.getElementById('loader');
 
-    document
-      .querySelector(".loader")
-      .classList.add("hidden");
+  window.addEventListener('load', ()=>{
+    const delay = reduceMotion ? 0 : 700;
 
-  },1500);
-
-});
-
-
-/* VIDEO MODAL */
-
-function openVideo(videoId){
-
-  const modal =
-    document.getElementById("videoModal");
-
-  const iframe =
-    document.getElementById("modalVideo");
-
-  iframe.src =
-    "https://www.youtube.com/embed/" +
-    videoId +
-    "?autoplay=1&rel=0";
-
-  modal.classList.add("active");
-
-  document.body.style.overflow = "hidden";
-
-}
+    setTimeout(()=>{
+      loader.classList.add('hide');
+    }, delay);
+  });
 
 
-function closeVideo(event){
+  /* ---------- VIDEO MODAL ---------- */
 
-  if(
-    event.target.id === "videoModal" ||
-    event.target.classList.contains("modal-close")
-  ){
+  function openVideo(videoId){
 
-    const modal =
-      document.getElementById("videoModal");
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideo');
 
-    const iframe =
-      document.getElementById("modalVideo");
+    video.src =
+      'https://www.youtube.com/embed/' +
+      videoId +
+      '?autoplay=1&rel=0';
 
-    iframe.src = "";
+    modal.classList.add('active');
 
-    modal.classList.remove("active");
-
-    document.body.style.overflow = "";
-
+    document.body.style.overflow = 'hidden';
   }
 
-}
 
+  function closeVideo(event){
 
-document.addEventListener(
-  "keydown",
-  (event) => {
-
-    if(event.key === "Escape"){
-
-      const modal =
-        document.getElementById("videoModal");
-
-      const iframe =
-        document.getElementById("modalVideo");
-
-      iframe.src = "";
-
-      modal.classList.remove("active");
-
-      document.body.style.overflow = "";
-
+    if(
+      event &&
+      event.target !== event.currentTarget &&
+      !event.target.classList.contains('modal-close')
+    ){
+      return;
     }
 
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideo');
+
+    modal.classList.remove('active');
+
+    video.src = '';
+
+    document.body.style.overflow = '';
   }
-);
 
 
-/* TIMECODE */
+  document.addEventListener('keydown', (event)=>{
 
-function updateTimecode(){
+    if(event.key === 'Escape'){
 
-  const now = new Date();
+      const modal = document.getElementById('videoModal');
 
-  const hours =
-    String(now.getHours()).padStart(2,"0");
-
-  const minutes =
-    String(now.getMinutes()).padStart(2,"0");
-
-  const seconds =
-    String(now.getSeconds()).padStart(2,"0");
-
-  const frames =
-    String(
-      Math.floor(now.getMilliseconds()/40)
-    ).padStart(2,"0");
-
-  document.getElementById("timecode")
-    .textContent =
-      `${hours}:${minutes}:${seconds}:${frames}`;
-
-}
-
-setInterval(updateTimecode,40);
-
-updateTimecode();
-
-
-/* SCROLL PROGRESS */
-
-function updateScroll(){
-
-  const scrollTop =
-    window.scrollY;
-
-  const documentHeight =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
-
-  const progress =
-    documentHeight > 0
-      ? scrollTop / documentHeight
-      : 0;
-
-  document.getElementById("timelineProgress")
-    .style.width =
-      `${progress * 100}%`;
-
-  document.getElementById("scrollPercent")
-    .textContent =
-      `${String(
-        Math.round(progress * 100)
-      ).padStart(2,"0")}%`;
-
-}
-
-window.addEventListener(
-  "scroll",
-  updateScroll,
-  {passive:true}
-);
-
-updateScroll();
-
-
-/* TIMELINE CHAPTERS */
-
-const chapters =
-  document.querySelectorAll(
-    ".timeline-chapter"
-  );
-
-const sections =
-  [
-    document.getElementById("work"),
-    document.getElementById("process"),
-    document.getElementById("about"),
-    document.getElementById("book")
-  ];
-
-
-function updateChapter(){
-
-  const scrollPosition =
-    window.scrollY +
-    window.innerHeight * .45;
-
-  let activeIndex = 0;
-
-  sections.forEach(
-    (section,index) => {
-
-      if(
-        section &&
-        scrollPosition >= section.offsetTop
-      ){
-
-        activeIndex = index;
-
+      if(modal.classList.contains('active')){
+        closeVideo({
+          target:modal,
+          currentTarget:modal
+        });
       }
 
     }
-  );
+
+  });
 
 
-  chapters.forEach(
-    (chapter,index) => {
+  /* ---------- COUNT-UP STATS ---------- */
 
-      chapter.classList.toggle(
-        "active",
-        index === activeIndex
-      );
+  const counters =
+    document.querySelectorAll('.num[data-count]');
 
-    }
-  );
+  const counterIO =
+    new IntersectionObserver((entries)=>{
 
-}
+      entries.forEach(entry=>{
 
-window.addEventListener(
-  "scroll",
-  updateChapter,
-  {passive:true}
-);
+        if(!entry.isIntersecting) return;
 
-updateChapter();
+        const el = entry.target;
 
+        const target =
+          parseInt(el.dataset.count, 10);
 
-/* REVEAL ANIMATIONS */
+        const suffix =
+          el.dataset.suffix || '';
 
-const revealElements =
-  document.querySelectorAll(
-    ".reel-card,.process-item,.stat,.about-text"
-  );
+        counterIO.unobserve(el);
 
+        if(reduceMotion){
 
-const observer =
-  new IntersectionObserver(
-    entries => {
+          el.textContent =
+            target + suffix;
 
-      entries.forEach(
-        entry => {
+          return;
 
-          if(entry.isIntersecting){
+        }
 
-            entry.target.style.opacity = "1";
+        const duration = 1100;
+        const start = performance.now();
 
-            entry.target.style.transform =
-              "translateY(0)";
+        function step(now){
 
-            observer.unobserve(
-              entry.target
-            );
+          const p =
+            Math.min(1, (now - start) / duration);
 
+          const eased =
+            1 - Math.pow(1 - p, 3);
+
+          el.textContent =
+            Math.round(eased * target) + suffix;
+
+          if(p < 1){
+            requestAnimationFrame(step);
           }
 
         }
-      );
 
-    },
-    {
-      threshold:.12
-    }
+        requestAnimationFrame(step);
+
+      });
+
+    }, { threshold:0.5 });
+
+
+  counters.forEach(el =>
+    counterIO.observe(el)
   );
 
 
-revealElements.forEach(
-  element => {
+  /* ---------- TIME CODE ---------- */
 
-    element.style.opacity = "0";
+  let frame = 0;
 
-    element.style.transform =
-      "translateY(25px)";
+  function tick(){
 
-    element.style.transition =
-      "opacity .7s ease, transform .7s ease";
+    frame++;
 
-    observer.observe(element);
+    const totalSeconds =
+      Math.floor(frame / 24);
+
+    const h =
+      String(Math.floor(totalSeconds / 3600))
+      .padStart(2,'0');
+
+    const m =
+      String(Math.floor((totalSeconds % 3600) / 60))
+      .padStart(2,'0');
+
+    const s =
+      String(totalSeconds % 60)
+      .padStart(2,'0');
+
+    const f =
+      String(frame % 24)
+      .padStart(2,'0');
+
+    const el =
+      document.getElementById('clock');
+
+    if(el){
+
+      el.textContent =
+        `${h}:${m}:${s}:${f}`;
+
+    }
 
   }
-);
+
+  setInterval(tick, 1000 / 24);
 
 
-/* PARALLAX */
+  /* ---------- REVEAL ON SCROLL ---------- */
 
-window.addEventListener(
-  "scroll",
-  () => {
+  const io =
+    new IntersectionObserver((entries)=>{
+
+      entries.forEach(e=>{
+
+        if(e.isIntersecting){
+
+          e.target.classList.add('in');
+
+        }
+
+      });
+
+    }, { threshold:0.15 });
+
+
+  document
+    .querySelectorAll('.reveal')
+    .forEach(el=>io.observe(el));
+
+
+  /* ---------- TIMELINE ---------- */
+
+  const sections =
+    [...document.querySelectorAll('section[id]')]
+    .map(s=>({
+      id:s.id,
+      top:0,
+      label:s.id.toUpperCase()
+    }));
+
+
+  const marksWrap =
+    document.getElementById('tl-marks');
+
+  const fill =
+    document.getElementById('tl-fill');
+
+  const label =
+    document.getElementById('tl-label');
+
+  const timeEl =
+    document.getElementById('tl-time');
+
+
+  function layoutMarks(){
+
+    const docHeight =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    marksWrap.innerHTML = '';
+
+    sections.forEach(sec=>{
+
+      const node =
+        document.getElementById(sec.id);
+
+      sec.top =
+        node.offsetTop;
+
+      const pct =
+        docHeight > 0
+          ? (sec.top / docHeight) * 100
+          : 0;
+
+      const mark =
+        document.createElement('div');
+
+      mark.className =
+        'tl-mark';
+
+      mark.style.left =
+        pct + '%';
+
+      mark.dataset.id =
+        sec.id;
+
+      marksWrap.appendChild(mark);
+
+    });
+
+  }
+
+
+  function onScroll(){
+
+    const docHeight =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
 
     const scrolled =
       window.scrollY;
 
-    const glow =
-      document.querySelector(
-        ".hero-glow"
-      );
+    const pct =
+      docHeight > 0
+        ? Math.min(100, (scrolled / docHeight) * 100)
+        : 0;
 
-    const glow2 =
-      document.querySelector(
-        ".hero-glow-2"
-      );
+    fill.style.width =
+      pct + '%';
+
+    timeEl.textContent =
+      Math.round(pct) + '%';
 
 
-    if(glow){
+    let current =
+      sections[0];
 
-      glow.style.transform =
-        `translateY(${scrolled * .08}px)`;
+    sections.forEach(sec=>{
+
+      if(scrolled + 120 >= sec.top){
+        current = sec;
+      }
+
+    });
+
+
+    if(label.textContent !== current.label){
+
+      if(reduceMotion){
+
+        label.textContent =
+          current.label;
+
+      }else{
+
+        label.classList.add('flash');
+
+        setTimeout(()=>{
+
+          label.textContent =
+            current.label;
+
+          label.classList.remove('flash');
+
+        },180);
+
+      }
 
     }
 
 
-    if(glow2){
+    document
+      .querySelectorAll('.tl-mark')
+      .forEach(m=>{
 
-      glow2.style.transform =
-        `translateY(${scrolled * -.04}px)`;
+        m.classList.toggle(
+          'active',
+          m.dataset.id === current.id
+        );
 
-    }
+      });
 
-  },
-  {passive:true}
-);
+  }
+
+
+  window.addEventListener('load', ()=>{
+
+    layoutMarks();
+    onScroll();
+
+  });
+
+
+  window.addEventListener(
+    'resize',
+    layoutMarks
+  );
+
+  window.addEventListener(
+    'scroll',
+    onScroll
+  );
+
+
+  /* ---------- HERO PARALLAX ---------- */
+
+  if(!reduceMotion){
+
+    const blobs =
+      document.querySelectorAll('.parallax');
+
+    window.addEventListener(
+      'scroll',
+      ()=>{
+
+        const y =
+          window.scrollY;
+
+        blobs.forEach((b,i)=>{
+
+          b.style.transform =
+            `translateY(${y * (i === 0 ? 0.12 : -0.1)}px)`;
+
+        });
+
+      },
+      { passive:true }
+    );
+
+  }
 
 </script>
 
