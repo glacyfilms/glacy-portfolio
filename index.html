@@ -1,1076 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Glacy Films — Cinematic Video Editor</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080808;
-      color: #f5f5f5;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* NAVBAR */
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 24px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(8, 8, 8, 0.75);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .logo {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 3px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .nav-links a {
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
-
-    /* HERO */
-
-    .hero {
-      min-height: 100vh;
-      padding: 180px 8% 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
-      top: 5%;
-      right: -150px;
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: #888;
-      margin-bottom: 25px;
-      font-weight: 700;
-    }
-
-    .hero h1 {
-      font-size: clamp(55px, 9vw, 125px);
-      line-height: 0.9;
-      letter-spacing: -6px;
-      max-width: 1000px;
-      margin-bottom: 35px;
-    }
-
-    .hero h1 span {
-      color: #777;
-    }
-
-    .hero-description {
-      max-width: 620px;
-      color: #999;
-      font-size: 17px;
-      line-height: 1.7;
-      margin-bottom: 40px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      padding: 15px 24px;
-      border: 1px solid #333;
-      border-radius: 3px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      transition: 0.3s;
-    }
-
-    .button.primary {
-      background: white;
-      color: black;
-      border-color: white;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-      border-color: white;
-    }
-
-    .scroll-text {
-      position: absolute;
-      bottom: 30px;
-      left: 8%;
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: #555;
-    }
-
-    /* GENERAL SECTIONS */
-
-    section {
-      padding: 120px 8%;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 55px;
-      gap: 30px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(38px, 5vw, 70px);
-      letter-spacing: -3px;
-      line-height: 1;
-    }
-
-    .section-subtitle {
-      color: #777;
-      max-width: 330px;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    /* WORK */
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 45px 25px;
-    }
-
-    .work-card {
-      cursor: pointer;
-    }
-
-    .work-thumb {
-      height: 420px;
-      position: relative;
-      overflow: hidden;
-      background: #111;
-      border-radius: 4px;
-    }
-
-    .thumb-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.7s ease, filter 0.7s ease;
-    }
-
-    .work-card:hover .thumb-image {
-      transform: scale(1.05);
-      filter: brightness(0.7);
-    }
-
-    .play-mini {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.95);
-      color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      padding-left: 3px;
-      opacity: 0;
-      transition: 0.35s;
-    }
-
-    .work-card:hover .play-mini {
-      opacity: 1;
-    }
-
-    .youtube-label {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      font-size: 9px;
-      letter-spacing: 2px;
-      padding: 8px 10px;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(10px);
-    }
-
-    .duration {
-      font-size: 11px;
-      color: #666;
-    }
-
-    .work-info {
-      padding-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .work-info h3 {
-      font-size: 19px;
-      margin-bottom: 7px;
-    }
-
-    .work-info p {
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: #666;
-    }
-
-    /* PROCESS */
-
-    .process-list {
-      border-top: 1px solid #222;
-    }
-
-    .process-item {
-      display: grid;
-      grid-template-columns: 100px 1fr 1fr;
-      gap: 40px;
-      padding: 35px 0;
-      border-bottom: 1px solid #222;
-      align-items: start;
-    }
-
-    .process-number {
-      color: #555;
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .process-item h3 {
-      font-size: 25px;
-    }
-
-    .process-item p {
-      color: #777;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    /* ABOUT */
-
-    .about {
-      background: #0d0d0d;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: center;
-    }
-
-    .about h2 {
-      font-size: clamp(45px, 6vw, 85px);
-      letter-spacing: -4px;
-      line-height: 0.95;
-    }
-
-    .about-text {
-      color: #888;
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .about-text strong {
-      color: white;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 30px;
-    }
-
-    .skill {
-      border: 1px solid #292929;
-      padding: 10px 14px;
-      font-size: 10px;
-      letter-spacing: 1px;
-      color: #aaa;
-    }
-
-    /* CONTACT */
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-    }
-
-    .contact h2 {
-      font-size: clamp(45px, 6vw, 80px);
-      letter-spacing: -4px;
-      line-height: 0.95;
-      margin-bottom: 30px;
-    }
-
-    .contact-description {
-      color: #777;
-      line-height: 1.7;
-      max-width: 450px;
-    }
-
-    .contact-info {
-      margin-top: 40px;
-    }
-
-    .contact-info p {
-      color: #555;
-      font-size: 11px;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    .contact-info a {
-      font-size: 17px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #333;
-      padding: 15px 0;
-      color: white;
-      outline: none;
-      font-family: inherit;
-      font-size: 14px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: white;
-    }
-
-    textarea {
-      min-height: 130px;
-    }
-
-    .submit-button {
-      align-self: flex-start;
-      background: white;
-      color: black;
-      border: none;
-      padding: 15px 28px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 11px;
-      letter-spacing: 1px;
-      transition: 0.3s;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-3px);
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 35px 8%;
-      border-top: 1px solid #1d1d1d;
-      display: flex;
-      justify-content: space-between;
-      color: #555;
-      font-size: 10px;
-      letter-spacing: 1px;
-    }
-
-    /* MODAL */
-
-    .video-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.92);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-    }
-
-    .video-modal.active {
-      display: flex;
-    }
-
-    .video-container {
-      width: min(1000px, 95vw);
-      position: relative;
-    }
-
-    .video-container iframe {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border: none;
-      display: block;
-      background: black;
-    }
-
-    .close-modal {
-      position: absolute;
-      right: 0;
-      bottom: calc(100% + 15px);
-      width: 40px;
-      height: 40px;
-      border: 1px solid #444;
-      background: #111;
-      color: white;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 800px) {
-      nav {
-        padding: 20px 5%;
-      }
-
-      .nav-links {
-        gap: 15px;
-      }
-
-      section {
-        padding: 85px 5%;
-      }
-
-      .hero {
-        padding-left: 5%;
-        padding-right: 5%;
-      }
-
-      .hero h1 {
-        letter-spacing: -3px;
-      }
-
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .work-grid,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-      }
-
-      .work-thumb {
-        height: 500px;
-      }
-
-      .process-item {
-        grid-template-columns: 50px 1fr;
-        gap: 15px;
-      }
-
-      .process-item p {
-        grid-column: 2;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 12px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .nav-links a:nth-child(2) {
-        display: none;
-      }
-
-      .work-thumb {
-        height: 400px;
-      }
-
-      .hero h1 {
-        font-size: 52px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- NAVIGATION -->
-
-  <nav>
-    <a href="#" class="logo">GLACY FILMS</a>
-
-    <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#process">Process</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-
-  <!-- HERO -->
-
-  <header class="hero">
-
-    <p class="eyebrow">VIDEO EDITOR / CREATOR</p>
-
-    <h1>
-      Cinematic edits,<br>
-      <span>built frame by frame.</span>
-    </h1>
-
-    <p class="hero-description">
-      I create cinematic videos, fan edits and short-form content
-      focused on strong visuals, flow, sound design and storytelling.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#work" class="button primary">VIEW MY WORK</a>
-      <a href="#contact" class="button">LET'S WORK</a>
-    </div>
-
-    <div class="scroll-text">SCROLL TO EXPLORE ↓</div>
-
-  </header>
-
-
-  <!-- WORK -->
-
-  <section id="work">
-
-    <div class="section-header">
-      <div>
-        <p class="eyebrow">SELECTED WORK</p>
-        <h2>My edits.</h2>
-      </div>
-
-      <p class="section-subtitle">
-        A selection of edits showing my style, flow, sound design and creativity.
-      </p>
-    </div>
-
-
-    <div class="work-grid">
-
-      <!-- VIDEO 1 -->
-
-      <article class="work-card" onclick="openVideo('YCfv4CIvmhg')">
-
-        <div class="work-thumb">
-
-          <img
-            src="https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg"
-            alt="Latest Work"
-            class="thumb-image"
-          />
-
-          <div class="play-mini">▶</div>
-
-          <span class="youtube-label">YOUTUBE</span>
-
-        </div>
-
-        <div class="work-info">
-
-          <div>
-            <h3>Latest Work</h3>
-            <p>SHORT-FORM</p>
-          </div>
-
-          <span class="duration">00:18</span>
-
-        </div>
-
-      </article>
-
-
-      <!-- VIDEO 2 -->
-
-      <article class="work-card" onclick="openVideo('eZLlwzoG1-I')">
-
-        <div class="work-thumb">
-
-          <img
-            src="https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg"
-            alt="No Way Home"
-            class="thumb-image"
-          />
-
-          <div class="play-mini">▶</div>
-
-          <span class="youtube-label">YOUTUBE</span>
-
-        </div>
-
-        <div class="work-info">
-
-          <div>
-            <h3>No Way Home</h3>
-            <p>FAN EDIT</p>
-          </div>
-
-          <span class="duration">00:20</span>
-
-        </div>
-
-      </article>
-
-
-      <!-- VIDEO 3 -->
-
-      <article class="work-card" onclick="openVideo('rQuOHkXVegY')">
-
-        <div class="work-thumb">
-
-          <img
-            src="https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg"
-            alt="Football Edit"
-            class="thumb-image"
-          />
-
-          <div class="play-mini">▶</div>
-
-          <span class="youtube-label">YOUTUBE</span>
-
-        </div>
-
-        <div class="work-info">
-
-          <div>
-            <h3>Football Edit</h3>
-            <p>FOOTBALL</p>
-          </div>
-
-          <span class="duration">00:18</span>
-
-        </div>
-
-      </article>
-
-
-      <!-- VIDEO 4 -->
-
-      <article class="work-card" onclick="openVideo('DE1S7t1AQmQ')">
-
-        <div class="work-thumb">
-
-          <img
-            src="https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg"
-            alt="Flow and SFX"
-            class="thumb-image"
-          />
-
-          <div class="play-mini">▶</div>
-
-          <span class="youtube-label">YOUTUBE</span>
-
-        </div>
-
-        <div class="work-info">
-
-          <div>
-            <h3>Flow &amp; SFX</h3>
-            <p>EDITING</p>
-          </div>
-
-          <span class="duration">00:20</span>
-
-        </div>
-
-      </article>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROCESS -->
-
-  <section id="process">
-
-    <div class="section-header">
-
-      <div>
-        <p class="eyebrow">PROCESS</p>
-        <h2>How I work.</h2>
-      </div>
-
-      <p class="section-subtitle">
-        From the first idea to the final frame.
-      </p>
-
-    </div>
-
-
-    <div class="process-list">
-
-      <div class="process-item">
-
-        <span class="process-number">01</span>
-
-        <h3>Concept</h3>
-
-        <p>
-          Understanding the idea, mood and story behind the video
-          before starting the edit.
-        </p>
-
-      </div>
-
-
-      <div class="process-item">
-
-        <span class="process-number">02</span>
-
-        <h3>Build</h3>
-
-        <p>
-          Creating the flow with pacing, transitions, effects,
-          motion graphics and detailed sound design.
-        </p>
-
-      </div>
-
-
-      <div class="process-item">
-
-        <span class="process-number">03</span>
-
-        <h3>Polish</h3>
-
-        <p>
-          Color, SFX, music, timing and small details that make
-          every frame feel intentional.
-        </p>
-
-      </div>
-
-
-      <div class="process-item">
-
-        <span class="process-number">04</span>
-
-        <h3>Final Cut</h3>
-
-        <p>
-          Exporting the final video and making sure everything
-          looks and sounds exactly how it should.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ABOUT -->
-
-  <section id="about" class="about">
-
-    <div class="about-grid">
-
-      <div>
-
-        <p class="eyebrow">ABOUT ME</p>
-
-        <h2>
-          I'm<br>
-          Glacy.
-        </h2>
-
-      </div>
-
-
-      <div class="about-text">
-
-        <p>
-          I'm <strong>Tim</strong>, a 14-year-old video editor and
-          creator from Slovakia.
-        </p>
-
-        <br>
-
-        <p>
-          I mainly work in <strong>After Effects</strong> and
-          <strong>Premiere Pro</strong>, creating cinematic edits,
-          fan edits and short-form content.
-        </p>
-
-        <br>
-
-        <p>
-          I'm focused on improving every project and developing
-          my own visual style through editing, storytelling,
-          sound design and cinematography.
-        </p>
-
-
-        <div class="skills">
-
-          <span class="skill">AFTER EFFECTS</span>
-          <span class="skill">PREMIERE PRO</span>
-          <span class="skill">SFX</span>
-          <span class="skill">MOTION</span>
-          <span class="skill">COLOR</span>
-          <span class="skill">SOUND DESIGN</span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CONTACT -->
-
-  <section id="contact" class="contact">
-
-    <div class="contact-grid">
-
-      <div>
-
-        <p class="eyebrow">CONTACT</p>
-
-        <h2>
-          Let's make<br>
-          something.
-        </h2>
-
-        <p class="contact-description">
-          Have a project, edit or idea in mind?
-          Send me a message and let's talk about it.
-        </p>
-
-
-        <div class="contact-info">
-
-          <p>EMAIL</p>
-
-          <a href="mailto:mrnutfn@gmail.com">
-            mrnutfn@gmail.com
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <form
-        action="https://formsubmit.co/mrnutfn@gmail.com"
-        method="POST"
+<div class="grid">
+
+  <!-- VIDEO 1 -->
+  <div class="reel-card reveal">
+
+    <div
+      class="thumb"
+      onclick="openVideo('YCfv4CIvmhg')"
+    >
+
+      <img
+        class="thumb-image"
+        src="https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg"
+        alt="Latest Work"
       >
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          required
-        />
+      <span class="youtube-label mono">
+        YOUTUBE
+      </span>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email"
-          required
-        />
+      <span class="play-mini">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </span>
 
-        <input
-          type="text"
-          name="subject"
-          placeholder="Project / subject"
-        />
-
-        <textarea
-          name="message"
-          placeholder="Tell me about your project..."
-          required
-        ></textarea>
-
-        <input
-          type="hidden"
-          name="_subject"
-          value="New Glacy Films project inquiry"
-        />
-
-        <input
-          type="hidden"
-          name="_captcha"
-          value="false"
-        />
-
-        <button
-          type="submit"
-          class="submit-button"
-        >
-          SEND MESSAGE →
-        </button>
-
-      </form>
+      <span class="duration mono">
+        WATCH
+      </span>
 
     </div>
 
-  </section>
+    <div class="reel-info">
 
+      <div class="title-row">
+        <h3>Latest Work</h3>
+        <span class="cat mono">EDIT</span>
+      </div>
 
-  <!-- FOOTER -->
-
-  <footer>
-
-    <span>© 2026 GLACY FILMS</span>
-
-    <span>
-      PREMIERE PRO × AFTER EFFECTS
-    </span>
-
-  </footer>
-
-
-  <!-- VIDEO MODAL -->
-
-  <div
-    class="video-modal"
-    id="videoModal"
-    onclick="closeOutside(event)"
-  >
-
-    <div class="video-container">
-
-      <button
-        class="close-modal"
-        onclick="closeVideo()"
-      >
-        ×
-      </button>
-
-      <iframe
-        id="youtubeFrame"
-        src=""
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+      <p>
+        Latest edit by Glacy.
+      </p>
 
     </div>
 
   </div>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- VIDEO 2 -->
+  <div class="reel-card reveal">
 
-  <script>
+    <div
+      class="thumb"
+      onclick="openVideo('eZLlwzoG1-I')"
+    >
 
-    function openVideo(videoId) {
+      <img
+        class="thumb-image"
+        src="https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg"
+        alt="No Way Home"
+      >
 
-      const modal = document.getElementById("videoModal");
-      const iframe = document.getElementById("youtubeFrame");
+      <span class="youtube-label mono">
+        YOUTUBE
+      </span>
 
-      iframe.src =
-        "https://www.youtube.com/embed/" +
-        videoId +
-        "?autoplay=1&rel=0";
+      <span class="play-mini">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </span>
 
-      modal.classList.add("active");
+      <span class="duration mono">
+        WATCH
+      </span>
 
-      document.body.style.overflow = "hidden";
-    }
+    </div>
 
+    <div class="reel-info">
 
-    function closeVideo() {
+      <div class="title-row">
+        <h3>No Way Home</h3>
+        <span class="cat mono">FAN EDIT</span>
+      </div>
 
-      const modal = document.getElementById("videoModal");
-      const iframe = document.getElementById("youtubeFrame");
+      <p>
+        Cinematic Spider-Man fan edit.
+      </p>
 
-      iframe.src = "";
+    </div>
 
-      modal.classList.remove("active");
-
-      document.body.style.overflow = "";
-    }
-
-
-    function closeOutside(event) {
-
-      if (event.target === document.getElementById("videoModal")) {
-        closeVideo();
-      }
-
-    }
+  </div>
 
 
-    document.addEventListener("keydown", function(event) {
+  <!-- VIDEO 3 -->
+  <div class="reel-card reveal">
 
-      if (event.key === "Escape") {
-        closeVideo();
-      }
+    <div
+      class="thumb"
+      onclick="openVideo('rQuOHkXVegY')"
+    >
 
-    });
+      <img
+        class="thumb-image"
+        src="https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg"
+        alt="Football Edit"
+      >
 
-  </script>
+      <span class="youtube-label mono">
+        YOUTUBE
+      </span>
 
-</body>
-</html>
+      <span class="play-mini">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </span>
+
+      <span class="duration mono">
+        WATCH
+      </span>
+
+    </div>
+
+    <div class="reel-info">
+
+      <div class="title-row">
+        <h3>Football Edit</h3>
+        <span class="cat mono">FOOTBALL</span>
+      </div>
+
+      <p>
+        Fast-paced football edit.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- VIDEO 4 -->
+  <div class="reel-card reveal">
+
+    <div
+      class="thumb"
+      onclick="openVideo('DE1S7t1AQmQ')"
+    >
+
+      <img
+        class="thumb-image"
+        src="https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg"
+        alt="Flow and SFX"
+      >
+
+      <span class="youtube-label mono">
+        YOUTUBE
+      </span>
+
+      <span class="play-mini">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </span>
+
+      <span class="duration mono">
+        WATCH
+      </span>
+
+    </div>
+
+    <div class="reel-info">
+
+      <div class="title-row">
+        <h3>Flow &amp; SFX</h3>
+        <span class="cat mono">EDITING</span>
+      </div>
+
+      <p>
+        Smooth flow with custom SFX.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
