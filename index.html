@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Glacy Films — Cinematic Video Editor</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --bg:#F6F9FF;
   --surface:#EAF1FC;
@@ -18,7 +18,7 @@
   --muted:#5A7290;
   --accent:#2F6FED;
   --accent-2:#7FB3FF;
-  --line:rgba(11,31,58,0.12);
+  --line:rgba(11,31,58,.12);
   --radius:2px;
 }
 
@@ -45,7 +45,7 @@ body{
 h1,h2,h3{
   font-family:'Space Grotesk',sans-serif;
   font-weight:600;
-  letter-spacing:-0.02em;
+  letter-spacing:-.02em;
 }
 
 .mono{
@@ -68,11 +68,9 @@ a{
   padding:0 32px;
 }
 
+/* REVEAL */
 
-/* ---------- REVEAL ---------- */
-
-@media (prefers-reduced-motion:no-preference){
-
+@media(prefers-reduced-motion:no-preference){
   .reveal{
     opacity:0;
     transform:translateY(16px);
@@ -83,11 +81,9 @@ a{
     opacity:1;
     transform:translateY(0);
   }
-
 }
 
-
-/* ---------- LOADER ---------- */
+/* LOADER */
 
 .loader{
   position:fixed;
@@ -115,15 +111,27 @@ a{
   letter-spacing:.14em;
 }
 
-.loader .rec-dot{
+.rec-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
   background:var(--accent);
 }
 
+@media(prefers-reduced-motion:no-preference){
+  .rec-dot{
+    animation:pulse 2s ease-in-out infinite;
+  }
+}
 
-/* ---------- HERO WORDS ---------- */
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.25}
+}
 
-@media (prefers-reduced-motion:no-preference){
+/* HERO WORDS */
 
+@media(prefers-reduced-motion:no-preference){
   .hero-title .word{
     display:inline-block;
     opacity:0;
@@ -138,20 +146,16 @@ a{
       transform:translateY(0);
     }
   }
-
 }
 
-@media (prefers-reduced-motion:reduce){
-
+@media(prefers-reduced-motion:reduce){
   .hero-title .word{
     opacity:1;
     transform:none;
   }
-
 }
 
-
-/* ---------- HEADER ---------- */
+/* HEADER */
 
 header{
   position:sticky;
@@ -173,40 +177,10 @@ header{
   display:flex;
   align-items:center;
   gap:8px;
-  font-family:'Space Grotesk';
+  font-family:'Space Grotesk',sans-serif;
   font-weight:700;
   font-size:18px;
 }
-
-.rec-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--accent);
-}
-
-@media (prefers-reduced-motion:no-preference){
-
-  .rec-dot{
-    animation:pulse 2s ease-in-out infinite;
-  }
-
-}
-
-@keyframes pulse{
-
-  0%,100%{
-    opacity:1;
-  }
-
-  50%{
-    opacity:.25;
-  }
-
-}
-
-
-/* DESKTOP NAV */
 
 nav ul{
   display:flex;
@@ -248,8 +222,7 @@ nav ul li a:hover{
   color:var(--ink);
 }
 
-
-/* ---------- BUTTON ---------- */
+/* BUTTON */
 
 .btn{
   display:inline-flex;
@@ -278,18 +251,7 @@ nav ul li a:hover{
   transform:translateY(0);
 }
 
-.btn-outline{
-  background:transparent;
-  color:var(--ink);
-  border:1px solid var(--line);
-}
-
-.btn-outline:hover{
-  border-color:var(--ink);
-}
-
-
-/* ---------- MOBILE MENU ---------- */
+/* MOBILE MENU */
 
 .mobile-menu-btn{
   display:none;
@@ -313,8 +275,7 @@ nav ul li a:hover{
   display:none;
 }
 
-
-/* ---------- HERO ---------- */
+/* HERO */
 
 .hero{
   position:relative;
@@ -335,7 +296,6 @@ nav ul li a:hover{
   border-radius:50%;
   filter:blur(70px);
   pointer-events:none;
-  z-index:0;
 }
 
 .glow-blob.b1{
@@ -354,8 +314,7 @@ nav ul li a:hover{
   background:radial-gradient(circle,rgba(127,179,255,.3),transparent 70%);
 }
 
-@media (prefers-reduced-motion:no-preference){
-
+@media(prefers-reduced-motion:no-preference){
   .glow-blob.b1{
     animation:driftA 14s ease-in-out infinite;
   }
@@ -363,31 +322,16 @@ nav ul li a:hover{
   .glow-blob.b2{
     animation:driftB 16s ease-in-out infinite;
   }
-
 }
 
 @keyframes driftA{
-
-  0%,100%{
-    transform:translate(0,0) scale(1);
-  }
-
-  50%{
-    transform:translate(-30px,30px) scale(1.1);
-  }
-
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-30px,30px) scale(1.1)}
 }
 
 @keyframes driftB{
-
-  0%,100%{
-    transform:translate(0,0) scale(1);
-  }
-
-  50%{
-    transform:translate(24px,-24px) scale(1.08);
-  }
-
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(24px,-24px) scale(1.08)}
 }
 
 .hero .wrap{
@@ -404,24 +348,15 @@ nav ul li a:hover{
   color:transparent;
 }
 
-@media (prefers-reduced-motion:no-preference){
-
+@media(prefers-reduced-motion:no-preference){
   .hero h1 em{
     animation:shimmer 4s linear infinite;
   }
-
 }
 
 @keyframes shimmer{
-
-  0%{
-    background-position:0% center;
-  }
-
-  100%{
-    background-position:200% center;
-  }
-
+  0%{background-position:0% center}
+  100%{background-position:200% center}
 }
 
 .hero-top{
@@ -435,7 +370,6 @@ nav ul li a:hover{
 
 .timecode{
   font-size:13px;
-  letter-spacing:.02em;
 }
 
 .hero h1{
@@ -485,7 +419,6 @@ nav ul li a:hover{
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-shrink:0;
 }
 
 .play-icon svg{
@@ -494,8 +427,7 @@ nav ul li a:hover{
   margin-left:2px;
 }
 
-
-/* ---------- SECTIONS ---------- */
+/* SECTIONS */
 
 .section{
   padding:96px 0;
@@ -523,8 +455,7 @@ nav ul li a:hover{
   margin-bottom:48px;
 }
 
-
-/* ---------- WORK GRID ---------- */
+/* WORK */
 
 .grid{
   display:grid;
@@ -587,10 +518,10 @@ nav ul li a:hover{
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%);
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55));
 }
 
-.thumb .play-mini{
+.play-mini{
   z-index:2;
   width:46px;
   height:46px;
@@ -615,33 +546,33 @@ nav ul li a:hover{
 
 .thumb.g1{
   background-image:
-  linear-gradient(135deg,rgba(18,35,63,.15),rgba(8,18,38,.25)),
-  url("https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg");
+    linear-gradient(135deg,rgba(18,35,63,.15),rgba(8,18,38,.25)),
+    url("https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg");
 }
 
 .thumb.g2{
   background-image:
-  linear-gradient(135deg,rgba(27,58,102,.15),rgba(8,18,38,.25)),
-  url("https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg");
+    linear-gradient(135deg,rgba(27,58,102,.15),rgba(8,18,38,.25)),
+    url("https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg");
 }
 
 .thumb.g3{
   background-image:
-  linear-gradient(135deg,rgba(15,46,78,.15),rgba(8,18,38,.25)),
-  url("https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg");
+    linear-gradient(135deg,rgba(15,46,78,.15),rgba(8,18,38,.25)),
+    url("https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg");
 }
 
 .thumb.g4{
   background-image:
-  linear-gradient(135deg,rgba(25,52,88,.15),rgba(8,18,38,.25)),
-  url("https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg");
+    linear-gradient(135deg,rgba(25,52,88,.15),rgba(8,18,38,.25)),
+    url("https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg");
 }
 
 .reel-info{
   padding:16px 18px;
 }
 
-.reel-info .title-row{
+.title-row{
   display:flex;
   justify-content:space-between;
   align-items:baseline;
@@ -663,8 +594,7 @@ nav ul li a:hover{
   margin-top:5px;
 }
 
-
-/* ---------- VIDEO MODAL ---------- */
+/* VIDEO MODAL */
 
 .video-modal{
   position:fixed;
@@ -711,8 +641,7 @@ nav ul li a:hover{
   z-index:5;
 }
 
-
-/* ---------- PROCESS ---------- */
+/* PROCESS */
 
 .process-list{
   display:flex;
@@ -748,8 +677,7 @@ nav ul li a:hover{
   max-width:520px;
 }
 
-
-/* ---------- ABOUT ---------- */
+/* ABOUT */
 
 .about-grid{
   display:grid;
@@ -786,7 +714,7 @@ nav ul li a:hover{
 }
 
 .stat .num{
-  font-family:'Space Grotesk';
+  font-family:'Space Grotesk',sans-serif;
   font-size:30px;
   font-weight:600;
 }
@@ -799,8 +727,7 @@ nav ul li a:hover{
   letter-spacing:.05em;
 }
 
-
-/* ---------- BOOK ---------- */
+/* BOOK */
 
 .book-grid{
   display:grid;
@@ -853,7 +780,7 @@ label{
 input,select,textarea{
   width:100%;
   padding:12px 14px;
-  font-family:'Inter';
+  font-family:'Inter',sans-serif;
   font-size:14px;
   background:var(--surface);
   border:1px solid var(--line);
@@ -881,11 +808,9 @@ textarea{
 
 button[type="submit"]{
   align-self:flex-start;
-  border:none;
 }
 
-
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 
 footer{
   padding:48px 0;
@@ -904,8 +829,7 @@ footer .mono{
   color:var(--muted);
 }
 
-
-/* ---------- TIMELINE ---------- */
+/* TIMELINE */
 
 .timeline-bar{
   position:fixed;
@@ -936,32 +860,52 @@ footer .mono{
   top:0;
   left:0;
   height:100%;
+  width:0;
   background:var(--accent);
-  width:0%;
   border-radius:2px;
   transition:width .1s linear;
   box-shadow:0 0 10px rgba(47,111,237,.6);
 }
 
+.tl-marks{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.tl-mark{
+  position:absolute;
+  top:50%;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--muted);
+  transform:translate(-50%,-50%);
+  opacity:.45;
+}
+
+.tl-mark.active{
+  background:var(--accent);
+  opacity:1;
+  box-shadow:0 0 8px rgba(47,111,237,.6);
+}
+
 .tl-chapter{
   font-size:12px;
-  font-family:'JetBrains Mono';
+  font-family:'JetBrains Mono',monospace;
   color:var(--muted);
   min-width:70px;
 }
 
 .tl-time{
   font-size:12px;
-  font-family:'JetBrains Mono';
+  font-family:'JetBrains Mono',monospace;
   color:var(--muted);
   min-width:64px;
   text-align:right;
 }
 
-
-/* ========================================================= */
-/* ====================== TABLET =========================== */
-/* ========================================================= */
+/* TABLET */
 
 @media(max-width:800px){
 
@@ -996,13 +940,9 @@ footer .mono{
     grid-template-columns:1fr;
     gap:45px;
   }
-
 }
 
-
-/* ========================================================= */
-/* ======================== PHONE =========================== */
-/* ========================================================= */
+/* PHONE */
 
 @media(max-width:720px){
 
@@ -1013,9 +953,6 @@ footer .mono{
   .wrap{
     padding:0 18px;
   }
-
-
-  /* HEADER */
 
   .nav{
     padding:14px 0;
@@ -1071,9 +1008,6 @@ footer .mono{
     border:1px solid var(--ink);
   }
 
-
-  /* HERO */
-
   .hero{
     padding:65px 0 60px;
   }
@@ -1090,7 +1024,6 @@ footer .mono{
   .hero h1{
     font-size:clamp(38px,11.5vw,58px);
     line-height:1;
-    max-width:100%;
   }
 
   .hero-sub{
@@ -1108,21 +1041,8 @@ footer .mono{
     padding:13px 16px 13px 13px;
   }
 
-  .play-icon{
-    width:32px;
-    height:32px;
-  }
-
-
-  /* SECTIONS */
-
   .section{
     padding:70px 0;
-  }
-
-  .eyebrow{
-    margin-bottom:16px;
-    font-size:11px;
   }
 
   .section h2{
@@ -1131,16 +1051,9 @@ footer .mono{
     margin-bottom:34px;
   }
 
-
-  /* WORK */
-
   .grid{
     grid-template-columns:1fr;
     gap:20px;
-  }
-
-  .reel-card{
-    width:100%;
   }
 
   .reel-card:hover{
@@ -1169,35 +1082,17 @@ footer .mono{
     font-size:12px;
   }
 
-
-  /* VIDEO MODAL */
-
   .video-modal{
     padding:12px;
-    align-items:center;
   }
 
   .modal-content{
     width:100%;
-    max-width:none;
-  }
-
-  .modal-video{
-    width:100%;
-    aspect-ratio:16/9;
-    min-height:0;
   }
 
   .modal-close{
     top:-46px;
-    right:0;
-    width:38px;
-    height:38px;
-    font-size:24px;
   }
-
-
-  /* PROCESS */
 
   .process-item{
     grid-template-columns:42px 1fr;
@@ -1213,9 +1108,6 @@ footer .mono{
     font-size:14px;
     line-height:1.6;
   }
-
-
-  /* ABOUT */
 
   .about-grid{
     gap:35px;
@@ -1244,9 +1136,6 @@ footer .mono{
     line-height:1.4;
   }
 
-
-  /* BOOK */
-
   .book-grid{
     gap:38px;
   }
@@ -1265,10 +1154,6 @@ footer .mono{
     width:65px;
   }
 
-  form{
-    gap:15px;
-  }
-
   .field-row{
     grid-template-columns:1fr;
     gap:15px;
@@ -1282,13 +1167,6 @@ footer .mono{
   button[type="submit"]{
     width:100%;
   }
-
-  .form-note{
-    line-height:1.5;
-  }
-
-
-  /* FOOTER */
 
   footer{
     padding:35px 0 70px;
@@ -1304,9 +1182,6 @@ footer .mono{
     font-size:10px;
   }
 
-
-  /* TIMELINE */
-
   .timeline-bar{
     height:50px;
     padding:0 14px;
@@ -1321,9 +1196,7 @@ footer .mono{
     min-width:40px;
     font-size:10px;
   }
-
 }
-
 
 /* VERY SMALL PHONES */
 
@@ -1344,840 +1217,371 @@ footer .mono{
   .stat-block{
     grid-template-columns:1fr;
   }
-
-  .modal-close{
-    top:-44px;
-  }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <!-- LOADER -->
-
 <div class="loader" id="loader">
-
   <div class="loader-inner">
-
     <span class="rec-dot"></span>
-
-    <span class="mono">
-      GLACY FILMS
-    </span>
-
+    <span class="mono">GLACY FILMS</span>
   </div>
-
 </div>
 
-
 <!-- HEADER -->
-
 <header>
-
   <div class="wrap nav">
 
     <div class="logo">
-
       <span class="rec-dot"></span>
-
       GLACY FILMS
-
     </div>
 
-
-    <!-- DESKTOP NAV -->
-
     <nav>
-
       <ul>
-
-        <li>
-          <a href="#work">Work</a>
-        </li>
-
-        <li>
-          <a href="#process">Process</a>
-        </li>
-
-        <li>
-          <a href="#about">About</a>
-        </li>
-
+        <li><a href="#work">Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#about">About</a></li>
         <li>
           <a href="#book" class="btn" style="padding:8px 16px;">
             Book a call
           </a>
         </li>
-
       </ul>
-
     </nav>
-
-
-    <!-- MOBILE MENU BUTTON -->
 
     <button
       class="mobile-menu-btn"
       id="mobileMenuBtn"
+      type="button"
       onclick="toggleMobileMenu()"
       aria-label="Open menu"
     >
-
       <svg viewBox="0 0 24 24" fill="none">
-
         <path
           d="M4 7h16M4 12h16M4 17h16"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
         />
-
       </svg>
-
     </button>
 
   </div>
 
-
-  <!-- MOBILE MENU -->
-
   <div class="mobile-menu" id="mobileMenu">
-
-    <a href="#work" onclick="closeMobileMenu()">
-      Work
-    </a>
-
-    <a href="#process" onclick="closeMobileMenu()">
-      Process
-    </a>
-
-    <a href="#about" onclick="closeMobileMenu()">
-      About
-    </a>
-
-    <a
-      href="#book"
-      class="mobile-book"
-      onclick="closeMobileMenu()"
-    >
-      Book a call
-    </a>
-
+    <a href="#work" onclick="closeMobileMenu()">Work</a>
+    <a href="#process" onclick="closeMobileMenu()">Process</a>
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#book" class="mobile-book" onclick="closeMobileMenu()">Book a call</a>
   </div>
-
 </header>
 
-
 <!-- HERO -->
-
 <section class="hero">
 
-  <div class="parallax p1">
+  <div class="parallax">
     <div class="glow-blob b1"></div>
   </div>
 
-  <div class="parallax p2">
+  <div class="parallax">
     <div class="glow-blob b2"></div>
   </div>
-
 
   <div class="wrap">
 
     <div class="hero-top mono">
-
-      <span>
-        REEL / 2026
-      </span>
-
-      <span
-        class="timecode"
-        id="clock"
-      >
-        00:00:00:00
-      </span>
-
+      <span>REEL / 2026</span>
+      <span class="timecode" id="clock">00:00:00:00</span>
     </div>
 
-
     <h1 class="hero-title">
-
-      <span
-        class="word"
-        style="--i:0"
-      >
-        Cinematic
-      </span>
-
-      <span
-        class="word"
-        style="--i:1"
-      >
-        edits,
-      </span>
-
+      <span class="word" style="--i:0">Cinematic</span>
+      <span class="word" style="--i:1">edits,</span>
       <br>
-
-      <span
-        class="word"
-        style="--i:2"
-      >
-        built
-      </span>
-
+      <span class="word" style="--i:2">built</span>
       <em>
-
-        <span
-          class="word"
-          style="--i:3"
-        >
-          frame
-        </span>
-
-        <span
-          class="word"
-          style="--i:4"
-        >
-          by
-        </span>
-
-        <span
-          class="word"
-          style="--i:5"
-        >
-          frame.
-        </span>
-
+        <span class="word" style="--i:3">frame</span>
+        <span class="word" style="--i:4">by</span>
+        <span class="word" style="--i:5">frame.</span>
       </em>
-
     </h1>
-
 
     <div class="hero-sub">
 
       <p class="hero-desc reveal">
-
         Video editor and creator making cinematic vlogs, fan edits, football content, and fast-paced short-form videos with custom sound design, captions and SFX.
-
       </p>
 
-
-      <a
-        href="#work"
-        class="play-reel reveal"
-      >
+      <a href="#work" class="play-reel reveal">
 
         <span class="play-icon">
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-
+          <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5v14l11-7z"/>
-
           </svg>
-
         </span>
 
-        <span>
-          Watch my work
-        </span>
+        <span>Watch my work</span>
 
       </a>
 
     </div>
 
   </div>
-
 </section>
 
-
 <!-- WORK -->
-
-<section
-  class="section"
-  id="work"
->
-
+<section class="section" id="work">
   <div class="wrap">
 
     <div class="eyebrow">
-
-      <span class="tc mono">
-        01
-      </span>
-
-      <span>
-        Selected work
-      </span>
-
+      <span class="tc mono">01</span>
+      <span>Selected work</span>
     </div>
 
-
     <h2 class="reveal">
-
       A handful of recent projects.
-
     </h2>
-
 
     <div class="grid">
 
-
-      <!-- VIDEO 1 -->
-
-      <div
-        class="reel-card reveal"
-        onclick="openVideo('YCfv4CIvmhg')"
-      >
-
+      <div class="reel-card reveal" onclick="openVideo('YCfv4CIvmhg')">
         <div class="thumb g1">
-
           <span class="play-mini">
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
-
             </svg>
-
           </span>
-
         </div>
-
 
         <div class="reel-info">
-
           <div class="title-row">
-
-            <h3>
-              Latest Work
-            </h3>
-
-            <span class="cat mono">
-              EDIT
-            </span>
-
+            <h3>Latest Work</h3>
+            <span class="cat mono">EDIT</span>
           </div>
-
-          <p>
-            Latest edit by Glacy Films.
-          </p>
-
+          <p>Latest edit by Glacy Films.</p>
         </div>
-
       </div>
 
-
-      <!-- VIDEO 2 -->
-
-      <div
-        class="reel-card reveal"
-        onclick="openVideo('eZLlwzoG1-I')"
-      >
-
+      <div class="reel-card reveal" onclick="openVideo('eZLlwzoG1-I')">
         <div class="thumb g2">
-
           <span class="play-mini">
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
-
             </svg>
-
           </span>
-
         </div>
-
 
         <div class="reel-info">
-
           <div class="title-row">
-
-            <h3>
-              No Way Home
-            </h3>
-
-            <span class="cat mono">
-              FAN EDIT
-            </span>
-
+            <h3>No Way Home</h3>
+            <span class="cat mono">FAN EDIT</span>
           </div>
-
-          <p>
-            Cinematic Spider-Man fan edit.
-          </p>
-
+          <p>Cinematic Spider-Man fan edit.</p>
         </div>
-
       </div>
 
-
-      <!-- VIDEO 3 -->
-
-      <div
-        class="reel-card reveal"
-        onclick="openVideo('rQuOHkXVegY')"
-      >
-
+      <div class="reel-card reveal" onclick="openVideo('rQuOHkXVegY')">
         <div class="thumb g3">
-
           <span class="play-mini">
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
-
             </svg>
-
           </span>
-
         </div>
-
 
         <div class="reel-info">
-
           <div class="title-row">
-
-            <h3>
-              Football Edit
-            </h3>
-
-            <span class="cat mono">
-              FOOTBALL
-            </span>
-
+            <h3>Football Edit</h3>
+            <span class="cat mono">FOOTBALL</span>
           </div>
-
-          <p>
-            Fast-paced Lamine Yamal football edit.
-          </p>
-
+          <p>Fast-paced Lamine Yamal football edit.</p>
         </div>
-
       </div>
 
-
-      <!-- VIDEO 4 -->
-
-      <div
-        class="reel-card reveal"
-        onclick="openVideo('DE1S7t1AQmQ')"
-      >
-
+      <div class="reel-card reveal" onclick="openVideo('DE1S7t1AQmQ')">
         <div class="thumb g4">
-
           <span class="play-mini">
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-
+            <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
-
             </svg>
-
           </span>
-
         </div>
-
 
         <div class="reel-info">
-
           <div class="title-row">
-
-            <h3>
-              Flow & SFX
-            </h3>
-
-            <span class="cat mono">
-              EDITING
-            </span>
-
+            <h3>Flow & SFX</h3>
+            <span class="cat mono">EDITING</span>
           </div>
-
-          <p>
-            Smooth flow with custom SFX.
-          </p>
-
+          <p>Smooth flow with custom SFX.</p>
         </div>
-
       </div>
-
 
     </div>
-
   </div>
-
 </section>
 
-
 <!-- PROCESS -->
-
-<section
-  class="section"
-  id="process"
->
-
+<section class="section" id="process">
   <div class="wrap">
 
     <div class="eyebrow">
-
-      <span class="tc mono">
-        02
-      </span>
-
-      <span>
-        How a project runs
-      </span>
-
+      <span class="tc mono">02</span>
+      <span>How a project runs</span>
     </div>
-
 
     <h2 class="reveal">
       From footage dump to final export.
     </h2>
 
-
     <div class="process-list">
 
-
       <div class="process-item reveal">
-
-        <div class="num mono">
-          01
-        </div>
-
+        <div class="num mono">01</div>
         <div>
-
-          <h3>
-            Ingest & organize
-          </h3>
-
+          <h3>Ingest & organize</h3>
           <p>
             Footage is logged, synced, and bin-organized so nothing gets lost before the first cut.
           </p>
-
         </div>
-
       </div>
 
-
       <div class="process-item reveal">
-
-        <div class="num mono">
-          02
-        </div>
-
+        <div class="num mono">02</div>
         <div>
-
-          <h3>
-            Assembly cut
-          </h3>
-
+          <h3>Assembly cut</h3>
           <p>
             A rough structure goes to you fast, so we can agree on story and pace before polish begins.
           </p>
-
         </div>
-
       </div>
 
-
       <div class="process-item reveal">
-
-        <div class="num mono">
-          03
-        </div>
-
+        <div class="num mono">03</div>
         <div>
-
-          <h3>
-            Fine cut & sound design
-          </h3>
-
+          <h3>Fine cut & sound design</h3>
           <p>
             Pacing, transitions, and — on action/fan edits — full custom sound design: foley, impacts, and score sync.
           </p>
-
         </div>
-
       </div>
 
-
       <div class="process-item reveal">
-
-        <div class="num mono">
-          04
-        </div>
-
+        <div class="num mono">04</div>
         <div>
-
-          <h3>
-            Color, captions & delivery
-          </h3>
-
+          <h3>Color, captions & delivery</h3>
           <p>
             Grade, caption styling, and export in whatever format you need — vertical for Reels, horizontal for YouTube.
           </p>
-
         </div>
-
       </div>
 
-
     </div>
-
   </div>
-
 </section>
 
-
 <!-- ABOUT -->
-
-<section
-  class="section"
-  id="about"
->
-
+<section class="section" id="about">
   <div class="wrap about-grid">
-
 
     <div>
 
       <div class="eyebrow">
-
-        <span class="tc mono">
-          03
-        </span>
-
-        <span>
-          About
-        </span>
-
+        <span class="tc mono">03</span>
+        <span>About</span>
       </div>
 
-
       <h2 class="reveal">
-
         Hi, I'm Glacy — I edit like every frame has a job to do.
-
       </h2>
 
-
       <p class="reveal">
-
         I'm a cinematic video editor and creator based in Slovakia. I create under the name <strong>Glacy Films</strong> on YouTube and also share my work on Instagram as <strong>@glacy.fillms</strong>.
-
       </p>
 
-
       <p class="reveal">
-
         YouTube is currently my main platform, but I use both YouTube and Instagram to share my edits, creative projects, and video work. My style ranges from cinematic vlogs and superhero fan edits to football and fast-paced short-form content.
-
       </p>
 
-
       <p class="reveal">
-
         On action/fan edits I build the sound design myself — foley, impacts, and score layering — so every hit lands and every transition feels intentional, not just fast.
-
       </p>
 
     </div>
-
 
     <div class="stat-block">
 
-
       <div class="stat reveal">
-
-        <div
-          class="num"
-          data-count="30"
-          data-suffix="+"
-        >
-          0+
-        </div>
-
-        <div class="label">
-          Edits delivered
-        </div>
-
+        <div class="num" data-count="30" data-suffix="+">0+</div>
+        <div class="label">Edits delivered</div>
       </div>
 
-
       <div class="stat reveal">
-
-        <div class="num">
-          6 mo
-        </div>
-
-        <div class="label">
-          Editing experience
-        </div>
-
+        <div class="num">6 mo</div>
+        <div class="label">Editing experience</div>
       </div>
 
-
       <div class="stat reveal">
-
-        <div class="num">
-          SK
-        </div>
-
-        <div class="label">
-          Based in Slovakia
-        </div>
-
+        <div class="num">SK</div>
+        <div class="label">Based in Slovakia</div>
       </div>
 
-
       <div class="stat reveal">
-
-        <div
-          class="num"
-          data-count="100"
-          data-suffix="%"
-        >
-          0%
-        </div>
-
-        <div class="label">
-          Original sound design on action edits
-        </div>
-
+        <div class="num" data-count="100" data-suffix="%">0%</div>
+        <div class="label">Original sound design on action edits</div>
       </div>
-
 
     </div>
-
   </div>
-
 </section>
 
-
 <!-- BOOK -->
-
-<section
-  class="section"
-  id="book"
-  style="border-bottom:none;"
->
-
+<section class="section" id="book" style="border-bottom:none;">
   <div class="wrap book-grid">
-
 
     <div class="book-info">
 
-
       <div class="eyebrow">
-
-        <span class="tc mono">
-          04
-        </span>
-
-        <span>
-          Book a call
-        </span>
-
+        <span class="tc mono">04</span>
+        <span>Book a call</span>
       </div>
 
-
-      <h2
-        class="reveal"
-        style="margin-bottom:24px;"
-      >
-
+      <h2 class="reveal" style="margin-bottom:24px;">
         Tell me about the project.
-
       </h2>
 
-
       <p>
-
         Have a project in mind? Send me the details and it will land straight in my inbox. I usually reply within 2 days when I'm available — if I'm away, I'll get back to you as soon as I can.
-
       </p>
 
-
       <div class="contact-line">
-
-        <span class="k mono">
-          EMAIL
-        </span>
-
-        <a href="mailto:mrnutfn@gmail.com">
-          mrnutfn@gmail.com
-        </a>
-
+        <span class="k mono">EMAIL</span>
+        <a href="mailto:mrnutfn@gmail.com">mrnutfn@gmail.com</a>
       </div>
 
-
       <div class="contact-line">
-
-        <span class="k mono">
-          YOUTUBE
-        </span>
-
-        <a
-          href="https://www.youtube.com/@glacyfilms"
-          target="_blank"
-        >
+        <span class="k mono">YOUTUBE</span>
+        <a href="https://www.youtube.com/@glacyfilms" target="_blank" rel="noopener">
           @glacyfilms
         </a>
-
       </div>
 
-
       <div class="contact-line">
-
-        <span class="k mono">
-          IG
-        </span>
-
-        <a
-          href="https://www.instagram.com/glacy.fillms/"
-          target="_blank"
-        >
+        <span class="k mono">IG</span>
+        <a href="https://www.instagram.com/glacy.fillms/" target="_blank" rel="noopener">
           @glacy.fillms
         </a>
-
       </div>
-
 
       <div class="contact-line">
-
-        <span class="k mono">
-          STATUS
-        </span>
-
-        <span>
-          Usually replying within 2 days
-        </span>
-
+        <span class="k mono">STATUS</span>
+        <span>Usually replying within 2 days</span>
       </div>
 
-
     </div>
-
 
     <div>
 
@@ -2204,139 +1608,69 @@ footer .mono{
           value="false"
         >
 
-
         <div class="field-row">
 
-
           <div>
-
-            <label for="name">
-              Name
-            </label>
-
+            <label for="name">Name</label>
             <input
               type="text"
               id="name"
               name="Name"
               required
             >
-
           </div>
 
-
           <div>
-
-            <label for="email">
-              Email
-            </label>
-
+            <label for="email">Email</label>
             <input
               type="email"
               id="email"
               name="Email"
               required
             >
-
           </div>
 
-
         </div>
-
 
         <div class="field-row">
 
-
           <div>
+            <label for="type">Project type</label>
 
-            <label for="type">
-              Project type
-            </label>
-
-            <select
-              id="type"
-              name="Project type"
-            >
-
-              <option>
-                Cinematic vlog
-              </option>
-
-              <option>
-                Fan edit (action / sound design)
-              </option>
-
-              <option>
-                Short-form / Reels
-              </option>
-
-              <option>
-                YouTube video
-              </option>
-
-              <option>
-                Other
-              </option>
-
+            <select id="type" name="Project type">
+              <option>Cinematic vlog</option>
+              <option>Fan edit (action / sound design)</option>
+              <option>Short-form / Reels</option>
+              <option>YouTube video</option>
+              <option>Other</option>
             </select>
-
           </div>
 
-
           <div>
+            <label for="budget">Budget range</label>
 
-            <label for="budget">
-              Budget range
-            </label>
-
-            <select
-              id="budget"
-              name="Budget"
-            >
-
-              <option>
-                €5 – €10
-              </option>
-
-              <option>
-                €10 – €20
-              </option>
-
-              <option>
-                €20 – €40
-              </option>
-
-              <option>
-                €40+
-              </option>
-
+            <select id="budget" name="Budget">
+              <option>€5 – €10</option>
+              <option>€10 – €20</option>
+              <option>€20 – €40</option>
+              <option>€40+</option>
             </select>
-
           </div>
-
 
         </div>
 
-
         <div>
-
-          <label for="date">
-            Preferred call date
-          </label>
+          <label for="date">Preferred call date</label>
 
           <input
             type="date"
             id="date"
             name="Preferred date"
           >
-
         </div>
 
-
         <div>
-
-          <label for="message">
-            Project details
-          </label>
+          <label for="message">Project details</label>
 
           <textarea
             id="message"
@@ -2344,40 +1678,26 @@ footer .mono{
             placeholder="Timeline, footage length, references, anything useful."
             required
           ></textarea>
-
         </div>
 
-
-        <button
-          type="submit"
-          class="btn"
-        >
+        <button type="submit" class="btn">
           Send inquiry
         </button>
 
-
         <p class="form-note">
-
           Submitting sends an email straight to my inbox — I usually reply within 2 days when I'm available.
-
         </p>
-
 
       </form>
 
     </div>
 
   </div>
-
 </section>
 
-
 <!-- FOOTER -->
-
 <footer>
-
   <div class="wrap footer-row">
-
     <span class="mono">
       © 2026 GLACY FILMS — VIDEO EDITOR
     </span>
@@ -2385,14 +1705,10 @@ footer .mono{
     <span class="mono">
       EDIT.MOV — 00:00:00:00 / END
     </span>
-
   </div>
-
 </footer>
 
-
 <!-- VIDEO MODAL -->
-
 <div
   class="video-modal"
   id="videoModal"
@@ -2401,243 +1717,206 @@ footer .mono{
 
   <div class="modal-content">
 
-
     <button
       class="modal-close"
+      type="button"
       onclick="closeVideo(event)"
       aria-label="Close video"
     >
       ×
     </button>
 
-
     <iframe
       id="modalVideo"
       class="modal-video"
       src=""
+      title="Glacy Films video"
       allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen
     ></iframe>
 
-
   </div>
-
 </div>
 
-
 <!-- TIMELINE -->
-
 <div class="timeline-bar">
 
-  <span
-    class="tl-chapter mono"
-    id="tl-label"
-  >
-    INTRO
+  <span class="tl-chapter mono" id="tl-label">
+    WORK
   </span>
 
-
   <div class="tl-track">
-
-    <div
-      class="tl-fill"
-      id="tl-fill"
-    ></div>
-
-    <div
-      class="tl-marks"
-      id="tl-marks"
-    ></div>
-
+    <div class="tl-fill" id="tl-fill"></div>
+    <div class="tl-marks" id="tl-marks"></div>
   </div>
 
-
-  <span
-    class="tl-time mono"
-    id="tl-time"
-  >
+  <span class="tl-time mono" id="tl-time">
     00%
   </span>
 
 </div>
 
-
 <script>
+/* ================================
+   GLACY FILMS — MAIN SCRIPT
+================================ */
+
+/* REDUCED MOTION */
+
+const reduceMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
 
 
-/* ---------- REDUCED MOTION ---------- */
+/* LOADER */
 
-const reduceMotion =
-  window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
+const loader = document.getElementById('loader');
 
+window.addEventListener('load', function(){
 
-/* ---------- LOADER ---------- */
+  const delay = reduceMotion ? 0 : 700;
 
-const loader =
-  document.getElementById('loader');
-
-window.addEventListener('load',()=>{
-
-  const delay =
-    reduceMotion ? 0 : 700;
-
-  setTimeout(()=>{
-
-    loader.classList.add('hide');
-
-  },delay);
+  setTimeout(function(){
+    if(loader){
+      loader.classList.add('hide');
+    }
+  }, delay);
 
 });
 
 
-/* ---------- MOBILE MENU ---------- */
+/* MOBILE MENU */
 
 function toggleMobileMenu(){
 
-  const menu =
-    document.getElementById('mobileMenu');
+  const menu = document.getElementById('mobileMenu');
 
-  menu.classList.toggle('active');
+  if(menu){
+    menu.classList.toggle('active');
+  }
 
 }
-
 
 function closeMobileMenu(){
 
-  const menu =
-    document.getElementById('mobileMenu');
+  const menu = document.getElementById('mobileMenu');
 
-  menu.classList.remove('active');
+  if(menu){
+    menu.classList.remove('active');
+  }
 
 }
 
-
-/* Close mobile menu if screen becomes desktop */
-
-window.addEventListener('resize',()=>{
+window.addEventListener('resize', function(){
 
   if(window.innerWidth > 720){
-
     closeMobileMenu();
-
   }
 
 });
 
 
-/* ---------- VIDEO MODAL ---------- */
+/* VIDEO MODAL */
 
 function openVideo(videoId){
 
-  const modal =
-    document.getElementById('videoModal');
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('modalVideo');
 
-  const video =
-    document.getElementById('modalVideo');
-
+  if(!modal || !video || !videoId){
+    return;
+  }
 
   video.src =
     'https://www.youtube.com/embed/' +
     videoId +
     '?autoplay=1&rel=0';
 
-
   modal.classList.add('active');
 
-  document.body.style.overflow =
-    'hidden';
-
+  document.body.style.overflow = 'hidden';
 }
 
 
 function closeVideo(event){
 
-  if(
-    event &&
-    event.target !== event.currentTarget &&
-    !event.target.classList.contains('modal-close')
-  ){
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('modalVideo');
 
+  if(!modal || !video){
     return;
-
   }
 
+  /* Only close when clicking the dark background
+     or the close button */
 
-  const modal =
-    document.getElementById('videoModal');
+  if(event){
 
-  const video =
-    document.getElementById('modalVideo');
+    const clickedBackground =
+      event.target === modal;
 
+    const clickedClose =
+      event.target.closest &&
+      event.target.closest('.modal-close');
+
+    if(!clickedBackground && !clickedClose){
+      return;
+    }
+  }
 
   modal.classList.remove('active');
 
   video.src = '';
 
   document.body.style.overflow = '';
-
 }
 
 
-/* ESC CLOSE */
+/* ESC */
 
-document.addEventListener('keydown',(event)=>{
+document.addEventListener('keydown', function(event){
 
-  if(event.key === 'Escape'){
+  if(event.key !== 'Escape'){
+    return;
+  }
 
-    const modal =
-      document.getElementById('videoModal');
+  const modal = document.getElementById('videoModal');
 
-    if(modal.classList.contains('active')){
-
-      closeVideo({
-        target:modal,
-        currentTarget:modal
-      });
-
-    }
-
+  if(modal && modal.classList.contains('active')){
+    closeVideo();
   }
 
 });
 
 
-/* ---------- COUNT-UP ---------- */
+/* COUNT UP */
 
-const counters =
-  document.querySelectorAll(
-    '.num[data-count]'
-  );
+const counters = document.querySelectorAll(
+  '.num[data-count]'
+);
 
+if('IntersectionObserver' in window){
 
-const counterIO =
-  new IntersectionObserver(
-    (entries)=>{
+  const counterIO = new IntersectionObserver(
+    function(entries){
 
-      entries.forEach(entry=>{
+      entries.forEach(function(entry){
 
-        if(!entry.isIntersecting) return;
+        if(!entry.isIntersecting){
+          return;
+        }
 
+        const el = entry.target;
 
-        const el =
-          entry.target;
-
-
-        const target =
-          parseInt(
-            el.dataset.count,
-            10
-          );
-
+        const target = parseInt(
+          el.dataset.count,
+          10
+        );
 
         const suffix =
           el.dataset.suffix || '';
 
-
         counterIO.unobserve(el);
-
 
         if(reduceMotion){
 
@@ -2645,43 +1924,29 @@ const counterIO =
             target + suffix;
 
           return;
-
         }
 
-
         const duration = 1100;
-
-        const start =
-          performance.now();
-
+        const start = performance.now();
 
         function step(now){
 
-          const p =
-            Math.min(
-              1,
-              (now - start) / duration
-            );
-
+          const progress = Math.min(
+            1,
+            (now - start) / duration
+          );
 
           const eased =
-            1 - Math.pow(1-p,3);
-
+            1 - Math.pow(1 - progress, 3);
 
           el.textContent =
-            Math.round(
-              eased * target
-            ) + suffix;
+            Math.round(eased * target) +
+            suffix;
 
-
-          if(p < 1){
-
+          if(progress < 1){
             requestAnimationFrame(step);
-
           }
-
         }
-
 
         requestAnimationFrame(step);
 
@@ -2693,128 +1958,143 @@ const counterIO =
     }
   );
 
+  counters.forEach(function(el){
+    counterIO.observe(el);
+  });
 
-counters.forEach(el =>
-  counterIO.observe(el)
-);
+}else{
+
+  counters.forEach(function(el){
+
+    el.textContent =
+      el.dataset.count +
+      (el.dataset.suffix || '');
+
+  });
+
+}
 
 
-/* ---------- TIME CODE ---------- */
+/* TIME CODE */
 
 let frame = 0;
-
 
 function tick(){
 
   frame++;
 
-
   const totalSeconds =
     Math.floor(frame / 24);
 
+  const h = String(
+    Math.floor(totalSeconds / 3600)
+  ).padStart(2,'0');
 
-  const h =
-    String(
-      Math.floor(
-        totalSeconds / 3600
-      )
-    ).padStart(2,'0');
+  const m = String(
+    Math.floor((totalSeconds % 3600) / 60)
+  ).padStart(2,'0');
 
+  const s = String(
+    totalSeconds % 60
+  ).padStart(2,'0');
 
-  const m =
-    String(
-      Math.floor(
-        (totalSeconds % 3600) / 60
-      )
-    ).padStart(2,'0');
+  const f = String(
+    frame % 24
+  ).padStart(2,'0');
 
-
-  const s =
-    String(
-      totalSeconds % 60
-    ).padStart(2,'0');
-
-
-  const f =
-    String(
-      frame % 24
-    ).padStart(2,'0');
-
-
-  const el =
+  const clock =
     document.getElementById('clock');
 
-
-  if(el){
-
-    el.textContent =
-      `${h}:${m}:${s}:${f}`;
-
+  if(clock){
+    clock.textContent =
+      h + ':' + m + ':' + s + ':' + f;
   }
 
 }
 
-
-setInterval(
-  tick,
-  1000 / 24
-);
+setInterval(tick, 1000 / 24);
 
 
-/* ---------- REVEAL ---------- */
+/* REVEAL */
 
-const io =
-  new IntersectionObserver(
-    (entries)=>{
+if('IntersectionObserver' in window){
 
-      entries.forEach(e=>{
+  const revealIO =
+    new IntersectionObserver(
+      function(entries){
 
-        if(e.isIntersecting){
+        entries.forEach(function(entry){
 
-          e.target.classList.add('in');
+          if(entry.isIntersecting){
 
-        }
+            entry.target.classList.add('in');
 
-      });
+            revealIO.unobserve(entry.target);
 
-    },
-    {
-      threshold:.15
-    }
-  );
+          }
+
+        });
+
+      },
+      {
+        threshold:.12
+      }
+    );
+
+  document
+    .querySelectorAll('.reveal')
+    .forEach(function(el){
+
+      revealIO.observe(el);
+
+    });
+
+}else{
+
+  document
+    .querySelectorAll('.reveal')
+    .forEach(function(el){
+
+      el.classList.add('in');
+
+    });
+
+}
 
 
-document
-  .querySelectorAll('.reveal')
-  .forEach(el =>
-    io.observe(el)
-  );
+/* TIMELINE */
 
-
-/* ---------- TIMELINE ---------- */
-
-const sections =
-  [...document.querySelectorAll('section[id]')]
-  .map(s=>({
-
-    id:s.id,
-    top:0,
-    label:s.id.toUpperCase()
-
-  }));
-
+const sections = [
+  {
+    id:'work',
+    label:'WORK',
+    top:0
+  },
+  {
+    id:'process',
+    label:'PROCESS',
+    top:0
+  },
+  {
+    id:'about',
+    label:'ABOUT',
+    top:0
+  },
+  {
+    id:'book',
+    label:'CONTACT',
+    top:0
+  }
+];
 
 const marksWrap =
   document.getElementById('tl-marks');
 
-
 const fill =
   document.getElementById('tl-fill');
 
-
 const label =
   document.getElementById('tl-label');
-
 
 const timeEl =
   document.getElementById('tl-time');
@@ -2822,45 +2102,50 @@ const timeEl =
 
 function layoutMarks(){
 
-  const docHeight =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
+  if(!marksWrap){
+    return;
+  }
 
+  const docHeight =
+    Math.max(
+      1,
+      document.documentElement.scrollHeight -
+      window.innerHeight
+    );
 
   marksWrap.innerHTML = '';
 
-
-  sections.forEach(sec=>{
+  sections.forEach(function(section){
 
     const node =
-      document.getElementById(sec.id);
+      document.getElementById(section.id);
 
+    if(!node){
+      return;
+    }
 
-    sec.top =
+    section.top =
       node.offsetTop;
 
-
-    const pct =
-      docHeight > 0
-        ? (sec.top / docHeight) * 100
-        : 0;
-
+    const percentage =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          (section.top / docHeight) * 100
+        )
+      );
 
     const mark =
       document.createElement('div');
 
-
-    mark.className =
-      'tl-mark';
-
+    mark.className = 'tl-mark';
 
     mark.style.left =
-      pct + '%';
-
+      percentage + '%';
 
     mark.dataset.id =
-      sec.id;
-
+      section.id;
 
     marksWrap.appendChild(mark);
 
@@ -2875,58 +2160,52 @@ function onScroll(){
     document.documentElement.scrollHeight -
     window.innerHeight;
 
+  const scrollTop =
+    window.scrollY || window.pageYOffset;
 
-  const scrolled =
-    window.scrollY;
-
-
-  const pct =
+  const percentage =
     docHeight > 0
       ? Math.min(
           100,
-          (scrolled / docHeight) * 100
+          Math.max(
+            0,
+            (scrollTop / docHeight) * 100
+          )
         )
       : 0;
 
+  if(fill){
+    fill.style.width =
+      percentage + '%';
+  }
 
-  fill.style.width =
-    pct + '%';
+  if(timeEl){
+    timeEl.textContent =
+      Math.round(percentage) + '%';
+  }
 
+  let current = sections[0];
 
-  timeEl.textContent =
-    Math.round(pct) + '%';
+  sections.forEach(function(section){
 
-
-  let current =
-    sections[0];
-
-
-  sections.forEach(sec=>{
-
-    if(scrolled + 120 >= sec.top){
-
-      current = sec;
-
+    if(scrollTop + 150 >= section.top){
+      current = section;
     }
 
   });
 
-
-  if(label.textContent !== current.label){
-
+  if(label){
     label.textContent =
       current.label;
-
   }
-
 
   document
     .querySelectorAll('.tl-mark')
-    .forEach(m=>{
+    .forEach(function(mark){
 
-      m.classList.toggle(
+      mark.classList.toggle(
         'active',
-        m.dataset.id === current.id
+        mark.dataset.id === current.id
       );
 
     });
@@ -2934,64 +2213,67 @@ function onScroll(){
 }
 
 
-window.addEventListener('load',()=>{
+window.addEventListener('load', function(){
+
+  setTimeout(function(){
+
+    layoutMarks();
+    onScroll();
+
+  },100);
+
+});
+
+
+window.addEventListener('resize', function(){
 
   layoutMarks();
-
   onScroll();
 
 });
 
 
 window.addEventListener(
-  'resize',
-  layoutMarks
-);
-
-
-window.addEventListener(
   'scroll',
-  onScroll
+  onScroll,
+  {
+    passive:true
+  }
 );
 
 
-/* ---------- HERO PARALLAX ---------- */
+/* HERO PARALLAX */
 
 if(!reduceMotion){
 
   const blobs =
-    document.querySelectorAll(
-      '.parallax'
-    );
-
+    document.querySelectorAll('.parallax');
 
   window.addEventListener(
     'scroll',
-    ()=>{
-
-      /* Disable strong parallax on phones */
+    function(){
 
       if(window.innerWidth <= 720){
 
-        blobs.forEach(b=>{
-          b.style.transform = '';
+        blobs.forEach(function(blob){
+          blob.style.transform = '';
         });
 
         return;
-
       }
 
-
       const y =
-        window.scrollY;
+        window.scrollY || window.pageYOffset;
 
+      blobs.forEach(function(blob,index){
 
-      blobs.forEach((b,i)=>{
+        const speed =
+          index === 0 ? .12 : -.10;
 
-        b.style.transform =
-          `translateY(${
-            y * (i === 0 ? .12 : -.1)
-          }px)`;
+        blob.style.transform =
+          'translateY(' +
+          (y * speed) +
+          'px)';
 
       });
 
