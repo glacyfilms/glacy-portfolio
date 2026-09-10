@@ -339,13 +339,26 @@ nav ul li a:hover{
   z-index:1;
 }
 
+/* FIXED HERO GRADIENT */
+
 .hero h1 em{
+  display:inline-block;
   font-style:normal;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));
+  margin-left:.18em;
+  background:linear-gradient(
+    90deg,
+    var(--accent),
+    var(--accent-2),
+    var(--accent)
+  );
   background-size:200% auto;
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
+}
+
+.hero h1 em .word + .word{
+  margin-left:.18em;
 }
 
 @media(prefers-reduced-motion:no-preference){
@@ -355,8 +368,13 @@ nav ul li a:hover{
 }
 
 @keyframes shimmer{
-  0%{background-position:0% center}
-  100%{background-position:200% center}
+  0%{
+    background-position:0% center;
+  }
+
+  100%{
+    background-position:200% center;
+  }
 }
 
 .hero-top{
@@ -486,7 +504,12 @@ nav ul li a:hover{
   left:-160%;
   width:55%;
   height:100%;
-  background:linear-gradient(115deg,transparent,rgba(255,255,255,.22),transparent);
+  background:linear-gradient(
+    115deg,
+    transparent,
+    rgba(255,255,255,.22),
+    transparent
+  );
   transform:skewX(-18deg);
   transition:left .7s ease;
   z-index:3;
@@ -518,7 +541,11 @@ nav ul li a:hover{
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55));
+  background:linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0,0,0,.55)
+  );
 }
 
 .play-mini{
@@ -546,25 +573,41 @@ nav ul li a:hover{
 
 .thumb.g1{
   background-image:
-    linear-gradient(135deg,rgba(18,35,63,.15),rgba(8,18,38,.25)),
+    linear-gradient(
+      135deg,
+      rgba(18,35,63,.15),
+      rgba(8,18,38,.25)
+    ),
     url("https://i.ytimg.com/vi/YCfv4CIvmhg/maxresdefault.jpg");
 }
 
 .thumb.g2{
   background-image:
-    linear-gradient(135deg,rgba(27,58,102,.15),rgba(8,18,38,.25)),
+    linear-gradient(
+      135deg,
+      rgba(27,58,102,.15),
+      rgba(8,18,38,.25)
+    ),
     url("https://i.ytimg.com/vi/eZLlwzoG1-I/maxresdefault.jpg");
 }
 
 .thumb.g3{
   background-image:
-    linear-gradient(135deg,rgba(15,46,78,.15),rgba(8,18,38,.25)),
+    linear-gradient(
+      135deg,
+      rgba(15,46,78,.15),
+      rgba(8,18,38,.25)
+    ),
     url("https://i.ytimg.com/vi/rQuOHkXVegY/maxresdefault.jpg");
 }
 
 .thumb.g4{
   background-image:
-    linear-gradient(135deg,rgba(25,52,88,.15),rgba(8,18,38,.25)),
+    linear-gradient(
+      135deg,
+      rgba(25,52,88,.15),
+      rgba(8,18,38,.25)
+    ),
     url("https://i.ytimg.com/vi/DE1S7t1AQmQ/maxresdefault.jpg");
 }
 
@@ -704,7 +747,10 @@ nav ul li a:hover{
   padding:20px;
   border-radius:var(--radius);
   background:var(--surface);
-  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
 }
 
 .stat:hover{
@@ -1026,6 +1072,14 @@ footer .mono{
     line-height:1;
   }
 
+  .hero h1 em{
+    margin-left:.12em;
+  }
+
+  .hero h1 em .word + .word{
+    margin-left:.12em;
+  }
+
   .hero-sub{
     margin-top:30px;
     gap:24px;
@@ -1233,6 +1287,7 @@ footer .mono{
 
 <!-- HEADER -->
 <header>
+
   <div class="wrap nav">
 
     <div class="logo">
@@ -1260,6 +1315,7 @@ footer .mono{
       onclick="toggleMobileMenu()"
       aria-label="Open menu"
     >
+
       <svg viewBox="0 0 24 24" fill="none">
         <path
           d="M4 7h16M4 12h16M4 17h16"
@@ -1268,16 +1324,26 @@ footer .mono{
           stroke-linecap="round"
         />
       </svg>
+
     </button>
 
   </div>
 
   <div class="mobile-menu" id="mobileMenu">
+
     <a href="#work" onclick="closeMobileMenu()">Work</a>
     <a href="#process" onclick="closeMobileMenu()">Process</a>
     <a href="#about" onclick="closeMobileMenu()">About</a>
-    <a href="#book" class="mobile-book" onclick="closeMobileMenu()">Book a call</a>
+    <a
+      href="#book"
+      class="mobile-book"
+      onclick="closeMobileMenu()"
+    >
+      Book a call
+    </a>
+
   </div>
+
 </header>
 
 <!-- HERO -->
@@ -1295,19 +1361,44 @@ footer .mono{
 
     <div class="hero-top mono">
       <span>REEL / 2026</span>
-      <span class="timecode" id="clock">00:00:00:00</span>
+      <span class="timecode" id="clock">
+        00:00:00:00
+      </span>
     </div>
 
+    <!-- HERO TITLE -->
     <h1 class="hero-title">
-      <span class="word" style="--i:0">Cinematic</span>
-      <span class="word" style="--i:1">edits,</span>
+
+      <span class="word" style="--i:0">
+        Cinematic
+      </span>
+
+      <span class="word" style="--i:1">
+        edits,
+      </span>
+
       <br>
-      <span class="word" style="--i:2">built</span>
+
+      <span class="word" style="--i:2">
+        built
+      </span>
+
       <em>
-        <span class="word" style="--i:3">frame</span>
-        <span class="word" style="--i:4">by</span>
-        <span class="word" style="--i:5">frame.</span>
+
+        <span class="word" style="--i:3">
+          frame
+        </span>
+
+        <span class="word" style="--i:4">
+          by
+        </span>
+
+        <span class="word" style="--i:5">
+          frame.
+        </span>
+
       </em>
+
     </h1>
 
     <div class="hero-sub">
@@ -1319,9 +1410,11 @@ footer .mono{
       <a href="#work" class="play-reel reveal">
 
         <span class="play-icon">
+
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5v14l11-7z"/>
           </svg>
+
         </span>
 
         <span>Watch my work</span>
@@ -1331,10 +1424,12 @@ footer .mono{
     </div>
 
   </div>
+
 </section>
 
 <!-- WORK -->
 <section class="section" id="work">
+
   <div class="wrap">
 
     <div class="eyebrow">
@@ -1348,84 +1443,167 @@ footer .mono{
 
     <div class="grid">
 
-      <div class="reel-card reveal" onclick="openVideo('YCfv4CIvmhg')">
+      <!-- VIDEO 1 -->
+      <div
+        class="reel-card reveal"
+        onclick="openVideo('YCfv4CIvmhg')"
+      >
+
         <div class="thumb g1">
+
           <span class="play-mini">
+
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
+
           </span>
+
         </div>
 
         <div class="reel-info">
+
           <div class="title-row">
+
             <h3>Latest Work</h3>
-            <span class="cat mono">EDIT</span>
+
+            <span class="cat mono">
+              EDIT
+            </span>
+
           </div>
-          <p>Latest edit by Glacy Films.</p>
+
+          <p>
+            Latest edit by Glacy Films.
+          </p>
+
         </div>
+
       </div>
 
-      <div class="reel-card reveal" onclick="openVideo('eZLlwzoG1-I')">
+      <!-- VIDEO 2 -->
+      <div
+        class="reel-card reveal"
+        onclick="openVideo('eZLlwzoG1-I')"
+      >
+
         <div class="thumb g2">
+
           <span class="play-mini">
+
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
+
           </span>
+
         </div>
 
         <div class="reel-info">
+
           <div class="title-row">
+
             <h3>No Way Home</h3>
-            <span class="cat mono">FAN EDIT</span>
+
+            <span class="cat mono">
+              FAN EDIT
+            </span>
+
           </div>
-          <p>Cinematic Spider-Man fan edit.</p>
+
+          <p>
+            Cinematic Spider-Man fan edit.
+          </p>
+
         </div>
+
       </div>
 
-      <div class="reel-card reveal" onclick="openVideo('rQuOHkXVegY')">
+      <!-- VIDEO 3 -->
+      <div
+        class="reel-card reveal"
+        onclick="openVideo('rQuOHkXVegY')"
+      >
+
         <div class="thumb g3">
+
           <span class="play-mini">
+
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
+
           </span>
+
         </div>
 
         <div class="reel-info">
+
           <div class="title-row">
+
             <h3>Football Edit</h3>
-            <span class="cat mono">FOOTBALL</span>
+
+            <span class="cat mono">
+              FOOTBALL
+            </span>
+
           </div>
-          <p>Fast-paced Lamine Yamal football edit.</p>
+
+          <p>
+            Fast-paced Lamine Yamal football edit.
+          </p>
+
         </div>
+
       </div>
 
-      <div class="reel-card reveal" onclick="openVideo('DE1S7t1AQmQ')">
+      <!-- VIDEO 4 -->
+      <div
+        class="reel-card reveal"
+        onclick="openVideo('DE1S7t1AQmQ')"
+      >
+
         <div class="thumb g4">
+
           <span class="play-mini">
+
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
+
           </span>
+
         </div>
 
         <div class="reel-info">
+
           <div class="title-row">
-            <h3>Flow & SFX</h3>
-            <span class="cat mono">EDITING</span>
+
+            <h3>Flow &amp; SFX</h3>
+
+            <span class="cat mono">
+              EDITING
+            </span>
+
           </div>
-          <p>Smooth flow with custom SFX.</p>
+
+          <p>
+            Smooth flow with custom SFX.
+          </p>
+
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
 <!-- PROCESS -->
 <section class="section" id="process">
+
   <div class="wrap">
 
     <div class="eyebrow">
@@ -1440,51 +1618,94 @@ footer .mono{
     <div class="process-list">
 
       <div class="process-item reveal">
-        <div class="num mono">01</div>
+
+        <div class="num mono">
+          01
+        </div>
+
         <div>
-          <h3>Ingest & organize</h3>
+
+          <h3>
+            Ingest &amp; organize
+          </h3>
+
           <p>
             Footage is logged, synced, and bin-organized so nothing gets lost before the first cut.
           </p>
+
         </div>
+
       </div>
 
       <div class="process-item reveal">
-        <div class="num mono">02</div>
+
+        <div class="num mono">
+          02
+        </div>
+
         <div>
-          <h3>Assembly cut</h3>
+
+          <h3>
+            Assembly cut
+          </h3>
+
           <p>
             A rough structure goes to you fast, so we can agree on story and pace before polish begins.
           </p>
+
         </div>
+
       </div>
 
       <div class="process-item reveal">
-        <div class="num mono">03</div>
+
+        <div class="num mono">
+          03
+        </div>
+
         <div>
-          <h3>Fine cut & sound design</h3>
+
+          <h3>
+            Fine cut &amp; sound design
+          </h3>
+
           <p>
             Pacing, transitions, and — on action/fan edits — full custom sound design: foley, impacts, and score sync.
           </p>
+
         </div>
+
       </div>
 
       <div class="process-item reveal">
-        <div class="num mono">04</div>
+
+        <div class="num mono">
+          04
+        </div>
+
         <div>
-          <h3>Color, captions & delivery</h3>
+
+          <h3>
+            Color, captions &amp; delivery
+          </h3>
+
           <p>
             Grade, caption styling, and export in whatever format you need — vertical for Reels, horizontal for YouTube.
           </p>
+
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
 <!-- ABOUT -->
 <section class="section" id="about">
+
   <div class="wrap about-grid">
 
     <div>
@@ -1515,41 +1736,94 @@ footer .mono{
     <div class="stat-block">
 
       <div class="stat reveal">
-        <div class="num" data-count="30" data-suffix="+">0+</div>
-        <div class="label">Edits delivered</div>
+
+        <div
+          class="num"
+          data-count="30"
+          data-suffix="+"
+        >
+          0+
+        </div>
+
+        <div class="label">
+          Edits delivered
+        </div>
+
       </div>
 
       <div class="stat reveal">
-        <div class="num">6 mo</div>
-        <div class="label">Editing experience</div>
+
+        <div class="num">
+          6 mo
+        </div>
+
+        <div class="label">
+          Editing experience
+        </div>
+
       </div>
 
       <div class="stat reveal">
-        <div class="num">SK</div>
-        <div class="label">Based in Slovakia</div>
+
+        <div class="num">
+          SK
+        </div>
+
+        <div class="label">
+          Based in Slovakia
+        </div>
+
       </div>
 
       <div class="stat reveal">
-        <div class="num" data-count="100" data-suffix="%">0%</div>
-        <div class="label">Original sound design on action edits</div>
+
+        <div
+          class="num"
+          data-count="100"
+          data-suffix="%"
+        >
+          0%
+        </div>
+
+        <div class="label">
+          Original sound design on action edits
+        </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
 <!-- BOOK -->
-<section class="section" id="book" style="border-bottom:none;">
+<section
+  class="section"
+  id="book"
+  style="border-bottom:none;"
+>
+
   <div class="wrap book-grid">
 
     <div class="book-info">
 
       <div class="eyebrow">
-        <span class="tc mono">04</span>
-        <span>Book a call</span>
+
+        <span class="tc mono">
+          04
+        </span>
+
+        <span>
+          Book a call
+        </span>
+
       </div>
 
-      <h2 class="reveal" style="margin-bottom:24px;">
+      <h2
+        class="reveal"
+        style="margin-bottom:24px;"
+      >
         Tell me about the project.
       </h2>
 
@@ -1558,27 +1832,59 @@ footer .mono{
       </p>
 
       <div class="contact-line">
-        <span class="k mono">EMAIL</span>
-        <a href="mailto:mrnutfn@gmail.com">mrnutfn@gmail.com</a>
+
+        <span class="k mono">
+          EMAIL
+        </span>
+
+        <a href="mailto:mrnutfn@gmail.com">
+          mrnutfn@gmail.com
+        </a>
+
       </div>
 
       <div class="contact-line">
-        <span class="k mono">YOUTUBE</span>
-        <a href="https://www.youtube.com/@glacyfilms" target="_blank" rel="noopener">
+
+        <span class="k mono">
+          YOUTUBE
+        </span>
+
+        <a
+          href="https://www.youtube.com/@glacyfilms"
+          target="_blank"
+          rel="noopener"
+        >
           @glacyfilms
         </a>
+
       </div>
 
       <div class="contact-line">
-        <span class="k mono">IG</span>
-        <a href="https://www.instagram.com/glacy.fillms/" target="_blank" rel="noopener">
+
+        <span class="k mono">
+          IG
+        </span>
+
+        <a
+          href="https://www.instagram.com/glacy.fillms/"
+          target="_blank"
+          rel="noopener"
+        >
           @glacy.fillms
         </a>
+
       </div>
 
       <div class="contact-line">
-        <span class="k mono">STATUS</span>
-        <span>Usually replying within 2 days</span>
+
+        <span class="k mono">
+          STATUS
+        </span>
+
+        <span>
+          Usually replying within 2 days
+        </span>
+
       </div>
 
     </div>
@@ -1611,23 +1917,33 @@ footer .mono{
         <div class="field-row">
 
           <div>
-            <label for="name">Name</label>
+
+            <label for="name">
+              Name
+            </label>
+
             <input
               type="text"
               id="name"
               name="Name"
               required
             >
+
           </div>
 
           <div>
-            <label for="email">Email</label>
+
+            <label for="email">
+              Email
+            </label>
+
             <input
               type="email"
               id="email"
               name="Email"
               required
             >
+
           </div>
 
         </div>
@@ -1635,42 +1951,92 @@ footer .mono{
         <div class="field-row">
 
           <div>
-            <label for="type">Project type</label>
 
-            <select id="type" name="Project type">
-              <option>Cinematic vlog</option>
-              <option>Fan edit (action / sound design)</option>
-              <option>Short-form / Reels</option>
-              <option>YouTube video</option>
-              <option>Other</option>
+            <label for="type">
+              Project type
+            </label>
+
+            <select
+              id="type"
+              name="Project type"
+            >
+
+              <option>
+                Cinematic vlog
+              </option>
+
+              <option>
+                Fan edit (action / sound design)
+              </option>
+
+              <option>
+                Short-form / Reels
+              </option>
+
+              <option>
+                YouTube video
+              </option>
+
+              <option>
+                Other
+              </option>
+
             </select>
+
           </div>
 
           <div>
-            <label for="budget">Budget range</label>
 
-            <select id="budget" name="Budget">
-              <option>€5 – €10</option>
-              <option>€10 – €20</option>
-              <option>€20 – €40</option>
-              <option>€40+</option>
+            <label for="budget">
+              Budget range
+            </label>
+
+            <select
+              id="budget"
+              name="Budget"
+            >
+
+              <option>
+                €5 – €10
+              </option>
+
+              <option>
+                €10 – €20
+              </option>
+
+              <option>
+                €20 – €40
+              </option>
+
+              <option>
+                €40+
+              </option>
+
             </select>
+
           </div>
 
         </div>
 
         <div>
-          <label for="date">Preferred call date</label>
+
+          <label for="date">
+            Preferred call date
+          </label>
 
           <input
             type="date"
             id="date"
             name="Preferred date"
           >
+
         </div>
 
         <div>
-          <label for="message">Project details</label>
+
+          <label for="message">
+            Project details
+          </label>
 
           <textarea
             id="message"
@@ -1678,9 +2044,13 @@ footer .mono{
             placeholder="Timeline, footage length, references, anything useful."
             required
           ></textarea>
+
         </div>
 
-        <button type="submit" class="btn">
+        <button
+          type="submit"
+          class="btn"
+        >
           Send inquiry
         </button>
 
@@ -1693,11 +2063,14 @@ footer .mono{
     </div>
 
   </div>
+
 </section>
 
 <!-- FOOTER -->
 <footer>
+
   <div class="wrap footer-row">
+
     <span class="mono">
       © 2026 GLACY FILMS — VIDEO EDITOR
     </span>
@@ -1705,7 +2078,9 @@ footer .mono{
     <span class="mono">
       EDIT.MOV — 00:00:00:00 / END
     </span>
+
   </div>
+
 </footer>
 
 <!-- VIDEO MODAL -->
@@ -1736,30 +2111,48 @@ footer .mono{
     ></iframe>
 
   </div>
+
 </div>
 
 <!-- TIMELINE -->
 <div class="timeline-bar">
 
-  <span class="tl-chapter mono" id="tl-label">
+  <span
+    class="tl-chapter mono"
+    id="tl-label"
+  >
     WORK
   </span>
 
   <div class="tl-track">
-    <div class="tl-fill" id="tl-fill"></div>
-    <div class="tl-marks" id="tl-marks"></div>
+
+    <div
+      class="tl-fill"
+      id="tl-fill"
+    ></div>
+
+    <div
+      class="tl-marks"
+      id="tl-marks"
+    ></div>
+
   </div>
 
-  <span class="tl-time mono" id="tl-time">
+  <span
+    class="tl-time mono"
+    id="tl-time"
+  >
     00%
   </span>
 
 </div>
 
 <script>
-/* ================================
+
+/* =========================================
    GLACY FILMS — MAIN SCRIPT
-================================ */
+========================================= */
+
 
 /* REDUCED MOTION */
 
@@ -1772,15 +2165,17 @@ const reduceMotion = window.matchMedia(
 
 const loader = document.getElementById('loader');
 
-window.addEventListener('load', function(){
+window.addEventListener('load',function(){
 
   const delay = reduceMotion ? 0 : 700;
 
   setTimeout(function(){
+
     if(loader){
       loader.classList.add('hide');
     }
-  }, delay);
+
+  },delay);
 
 });
 
@@ -1789,7 +2184,8 @@ window.addEventListener('load', function(){
 
 function toggleMobileMenu(){
 
-  const menu = document.getElementById('mobileMenu');
+  const menu =
+    document.getElementById('mobileMenu');
 
   if(menu){
     menu.classList.toggle('active');
@@ -1799,7 +2195,8 @@ function toggleMobileMenu(){
 
 function closeMobileMenu(){
 
-  const menu = document.getElementById('mobileMenu');
+  const menu =
+    document.getElementById('mobileMenu');
 
   if(menu){
     menu.classList.remove('active');
@@ -1807,7 +2204,7 @@ function closeMobileMenu(){
 
 }
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize',function(){
 
   if(window.innerWidth > 720){
     closeMobileMenu();
@@ -1820,8 +2217,11 @@ window.addEventListener('resize', function(){
 
 function openVideo(videoId){
 
-  const modal = document.getElementById('videoModal');
-  const video = document.getElementById('modalVideo');
+  const modal =
+    document.getElementById('videoModal');
+
+  const video =
+    document.getElementById('modalVideo');
 
   if(!modal || !video || !videoId){
     return;
@@ -1834,21 +2234,22 @@ function openVideo(videoId){
 
   modal.classList.add('active');
 
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
+
 }
 
 
 function closeVideo(event){
 
-  const modal = document.getElementById('videoModal');
-  const video = document.getElementById('modalVideo');
+  const modal =
+    document.getElementById('videoModal');
+
+  const video =
+    document.getElementById('modalVideo');
 
   if(!modal || !video){
     return;
   }
-
-  /* Only close when clicking the dark background
-     or the close button */
 
   if(event){
 
@@ -1859,31 +2260,42 @@ function closeVideo(event){
       event.target.closest &&
       event.target.closest('.modal-close');
 
-    if(!clickedBackground && !clickedClose){
+    if(
+      !clickedBackground &&
+      !clickedClose
+    ){
       return;
     }
+
   }
 
   modal.classList.remove('active');
 
-  video.src = '';
+  video.src='';
 
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
+
 }
 
 
 /* ESC */
 
-document.addEventListener('keydown', function(event){
+document.addEventListener('keydown',function(event){
 
   if(event.key !== 'Escape'){
     return;
   }
 
-  const modal = document.getElementById('videoModal');
+  const modal =
+    document.getElementById('videoModal');
 
-  if(modal && modal.classList.contains('active')){
+  if(
+    modal &&
+    modal.classList.contains('active')
+  ){
+
     closeVideo();
+
   }
 
 });
@@ -1891,72 +2303,83 @@ document.addEventListener('keydown', function(event){
 
 /* COUNT UP */
 
-const counters = document.querySelectorAll(
-  '.num[data-count]'
-);
+const counters =
+  document.querySelectorAll(
+    '.num[data-count]'
+  );
 
 if('IntersectionObserver' in window){
 
-  const counterIO = new IntersectionObserver(
-    function(entries){
+  const counterIO =
+    new IntersectionObserver(
+      function(entries){
 
-      entries.forEach(function(entry){
+        entries.forEach(function(entry){
 
-        if(!entry.isIntersecting){
-          return;
-        }
-
-        const el = entry.target;
-
-        const target = parseInt(
-          el.dataset.count,
-          10
-        );
-
-        const suffix =
-          el.dataset.suffix || '';
-
-        counterIO.unobserve(el);
-
-        if(reduceMotion){
-
-          el.textContent =
-            target + suffix;
-
-          return;
-        }
-
-        const duration = 1100;
-        const start = performance.now();
-
-        function step(now){
-
-          const progress = Math.min(
-            1,
-            (now - start) / duration
-          );
-
-          const eased =
-            1 - Math.pow(1 - progress, 3);
-
-          el.textContent =
-            Math.round(eased * target) +
-            suffix;
-
-          if(progress < 1){
-            requestAnimationFrame(step);
+          if(!entry.isIntersecting){
+            return;
           }
-        }
 
-        requestAnimationFrame(step);
+          const el =
+            entry.target;
 
-      });
+          const target =
+            parseInt(
+              el.dataset.count,
+              10
+            );
 
-    },
-    {
-      threshold:.5
-    }
-  );
+          const suffix =
+            el.dataset.suffix || '';
+
+          counterIO.unobserve(el);
+
+          if(reduceMotion){
+
+            el.textContent =
+              target + suffix;
+
+            return;
+
+          }
+
+          const duration=1100;
+          const start=performance.now();
+
+          function step(now){
+
+            const progress =
+              Math.min(
+                1,
+                (now-start)/duration
+              );
+
+            const eased =
+              1-Math.pow(
+                1-progress,
+                3
+              );
+
+            el.textContent =
+              Math.round(
+                eased*target
+              ) + suffix;
+
+            if(progress < 1){
+              requestAnimationFrame(step);
+            }
+
+          }
+
+          requestAnimationFrame(step);
+
+        });
+
+      },
+      {
+        threshold:.5
+      }
+    );
 
   counters.forEach(function(el){
     counterIO.observe(el);
@@ -1977,42 +2400,53 @@ if('IntersectionObserver' in window){
 
 /* TIME CODE */
 
-let frame = 0;
+let frame=0;
 
 function tick(){
 
   frame++;
 
   const totalSeconds =
-    Math.floor(frame / 24);
+    Math.floor(frame/24);
 
-  const h = String(
-    Math.floor(totalSeconds / 3600)
-  ).padStart(2,'0');
+  const h =
+    String(
+      Math.floor(totalSeconds/3600)
+    ).padStart(2,'0');
 
-  const m = String(
-    Math.floor((totalSeconds % 3600) / 60)
-  ).padStart(2,'0');
+  const m =
+    String(
+      Math.floor(
+        (totalSeconds%3600)/60
+      )
+    ).padStart(2,'0');
 
-  const s = String(
-    totalSeconds % 60
-  ).padStart(2,'0');
+  const s =
+    String(
+      totalSeconds%60
+    ).padStart(2,'0');
 
-  const f = String(
-    frame % 24
-  ).padStart(2,'0');
+  const f =
+    String(
+      frame%24
+    ).padStart(2,'0');
 
   const clock =
     document.getElementById('clock');
 
   if(clock){
+
     clock.textContent =
-      h + ':' + m + ':' + s + ':' + f;
+      h+':'+m+':'+s+':'+f;
+
   }
 
 }
 
-setInterval(tick, 1000 / 24);
+setInterval(
+  tick,
+  1000/24
+);
 
 
 /* REVEAL */
@@ -2029,7 +2463,9 @@ if('IntersectionObserver' in window){
 
             entry.target.classList.add('in');
 
-            revealIO.unobserve(entry.target);
+            revealIO.unobserve(
+              entry.target
+            );
 
           }
 
@@ -2064,7 +2500,7 @@ if('IntersectionObserver' in window){
 
 /* TIMELINE */
 
-const sections = [
+const sections=[
   {
     id:'work',
     label:'WORK',
@@ -2113,12 +2549,14 @@ function layoutMarks(){
       window.innerHeight
     );
 
-  marksWrap.innerHTML = '';
+  marksWrap.innerHTML='';
 
   sections.forEach(function(section){
 
     const node =
-      document.getElementById(section.id);
+      document.getElementById(
+        section.id
+      );
 
     if(!node){
       return;
@@ -2132,17 +2570,17 @@ function layoutMarks(){
         100,
         Math.max(
           0,
-          (section.top / docHeight) * 100
+          (section.top/docHeight)*100
         )
       );
 
     const mark =
       document.createElement('div');
 
-    mark.className = 'tl-mark';
+    mark.className='tl-mark';
 
     mark.style.left =
-      percentage + '%';
+      percentage+'%';
 
     mark.dataset.id =
       section.id;
@@ -2161,7 +2599,8 @@ function onScroll(){
     window.innerHeight;
 
   const scrollTop =
-    window.scrollY || window.pageYOffset;
+    window.scrollY ||
+    window.pageYOffset;
 
   const percentage =
     docHeight > 0
@@ -2169,34 +2608,46 @@ function onScroll(){
           100,
           Math.max(
             0,
-            (scrollTop / docHeight) * 100
+            (scrollTop/docHeight)*100
           )
         )
       : 0;
 
   if(fill){
+
     fill.style.width =
-      percentage + '%';
+      percentage+'%';
+
   }
 
   if(timeEl){
+
     timeEl.textContent =
-      Math.round(percentage) + '%';
+      Math.round(percentage)+'%';
+
   }
 
-  let current = sections[0];
+  let current =
+    sections[0];
 
   sections.forEach(function(section){
 
-    if(scrollTop + 150 >= section.top){
-      current = section;
+    if(
+      scrollTop+150 >=
+      section.top
+    ){
+
+      current=section;
+
     }
 
   });
 
   if(label){
+
     label.textContent =
       current.label;
+
   }
 
   document
@@ -2213,7 +2664,7 @@ function onScroll(){
 }
 
 
-window.addEventListener('load', function(){
+window.addEventListener('load',function(){
 
   setTimeout(function(){
 
@@ -2225,7 +2676,7 @@ window.addEventListener('load', function(){
 });
 
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize',function(){
 
   layoutMarks();
   onScroll();
@@ -2256,23 +2707,29 @@ if(!reduceMotion){
       if(window.innerWidth <= 720){
 
         blobs.forEach(function(blob){
-          blob.style.transform = '';
+
+          blob.style.transform='';
+
         });
 
         return;
+
       }
 
       const y =
-        window.scrollY || window.pageYOffset;
+        window.scrollY ||
+        window.pageYOffset;
 
       blobs.forEach(function(blob,index){
 
         const speed =
-          index === 0 ? .12 : -.10;
+          index===0
+            ? .12
+            : -.10;
 
         blob.style.transform =
           'translateY(' +
-          (y * speed) +
+          (y*speed) +
           'px)';
 
       });
